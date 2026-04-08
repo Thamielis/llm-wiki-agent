@@ -5,6 +5,12 @@ Append-only chronological record of all operations.
 Format: `## [YYYY-MM-DD] <operation> | <title>`
 
 ## [2026-04-08] lint | Wiki health check
+## [2026-04-08] ingest | Inhaltsverzeichnis für PowerShell\Basics
+## [2026-04-08] ingest | 5 PowerShell Script Examples To Inspire You to Get Scripting
+## [2026-04-08] ingest | 5 PowerShell Tips Every User Needs to Know
+## [2026-04-08] ingest | Adjust prompt function in PowerShell
+## [2026-04-08] ingest | Anonymous Functions in PowerShell
+## [2026-04-08] lint | Wiki health check
 ## [2026-04-08] ingest | Windows Troubleshooting
 ## [2026-04-08] ingest | The Top 10 PowerShell Commands Every Sysadmin Should Know
 ## [2026-04-08] ingest | 10 PowerShell commands every sysadmin should know

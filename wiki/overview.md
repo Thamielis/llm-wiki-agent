@@ -45,3 +45,7 @@ New remote-administration sources add pragmatic incident-response workflows for 
 
 ## Windows troubleshooting cluster
 Recent ingest work added troubleshooting-pack operations, event-log parsing practices, full-spectrum artifact triage collection, and baseline sysadmin command guidance, strengthening the wiki's incident-response and diagnostics depth.
+
+
+## PowerShell basics cluster
+This batch expands beginner/fundamental coverage with starter script examples, shell prompt customization, anonymous-function/scriptblock semantics, and practical usage tips around help, execution policy, and remoting.

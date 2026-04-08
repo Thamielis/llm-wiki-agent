@@ -6,6 +6,11 @@ This file is maintained by the LLM. Updated on every ingest.
 - [Overview](overview.md) — living synthesis across all sources
 
 ## Sources
+- [Inhaltsverzeichnis für PowerShell\Basics](sources/basics-toc.md) — index marker for foundational PowerShell tutorials
+- [5 PowerShell Script Examples To Inspire You to Get Scripting](sources/5-powershell-script-examples-to-inspire-you-to-get-scripting.md) — practical starter scripts for registry/services/CIM/install/error handling
+- [5 PowerShell Tips Every User Needs to Know](sources/5-powershell-tips-every-user-needs-to-know.md) — execution/help/remoting fundamentals and usage heuristics
+- [Adjust prompt function in PowerShell](sources/adjust-prompt-function-in-powershell.md) — session-context prompt customization pattern
+- [Anonymous Functions in PowerShell](sources/anonymous-functions-in-powershell.md) — script-block-as-anonymous-function semantics and delegate interop
 - [Windows Troubleshooting](sources/windows-troubleshooting-index.md) — section index connecting triage and troubleshooting-pack workflows
 - [The Top 10 PowerShell Commands Every Sysadmin Should Know](sources/top-powershell-commands.md) — concise baseline cmdlet checklist for operators
 - [10 PowerShell commands every sysadmin should know](sources/10-powershell-commands-for-sysadmins.md) — expanded practical walkthrough of foundational cmdlets
@@ -184,6 +189,7 @@ This file is maintained by the LLM. Updated on every ingest.
 - [Codex](entities/Codex.md) — coding agent embedded in the cookbook ticket-to-PR loop
 
 ## Concepts
+- [PowerShell Basics](concepts/PowerShellBasics.md) — foundational cmdlet literacy, script structure, and shell/remoting essentials
 - [Windows Troubleshooting](concepts/WindowsTroubleshooting.md) — troubleshooting packs, triage artifact collection, and remediation workflows
 - [Remote Operations](concepts/RemoteOperations.md) — remote reboot, process control, and software uninstallation administration patterns
 - [Network Diagnostics](concepts/NetworkDiagnostics.md) — scripted connectivity, traceroute, and multi-port validation patterns
