@@ -77,7 +77,56 @@ This file is maintained by the LLM. Updated on every ingest.
 - [Unified Approach to Generating Documentation for PowerShell Cmdlets](sources/unified-approach-to-generating-documentation-for-powershell-cmdlets.md) — wallchart synthesis tying cmdlet help generation to browsable API docs
 - [Using C to Create PowerShell Cmdlets: The Basics](sources/using-c-to-create-powershell-cmdlets-the-basics.md) — step-by-step recipe for native-feeling C# cmdlets in PowerShell
 - [Automate Jira and GitHub with Codex](sources/automate-jira-and-github-with-codex.md) — cookbook workflow for label-triggered Jira-to-PR automation through GitHub Actions and Codex
-
+- [Abstract Syntax Tree - powershell.one](sources/abstract-syntax-tree-powershell-one.md) — ingested in batch continuation from `AST`
+- [Advanced Tokenizing PowerShell Scripts - powershell.one](sources/advanced-tokenizing-powershell-scripts-powershell-one.md) — ingested in batch continuation from `AST`
+- [Tokenizing PowerShell Scripts - powershell.one](sources/tokenizing-powershell-scripts-powershell-one.md) — ingested in batch continuation from `AST`
+- [Inhaltsverzeichnis für PowerShell\00-ToInclude\PS\Cmdlet-Help](sources/cmdlet-help-toc.md) — ingested in batch continuation from `Cmdlet-Help`
+- [PowerShell Cmdlet finden - 9 Möglichkeiten der Suche](sources/powershell-cmdlet-finden-9-moglichkeiten-der-suche.md) — ingested in batch continuation from `Cmdlet-Help`
+- [`function` `Connect-SQL` `{`](sources/execution-of-powershell-sql-queries.md) — ingested in batch continuation from `Credentials`
+- [Have you ever wonder how to store script credentials securely ? If no, in todays article I want to explain you how to do](sources/how-to-store-script-credentials-securely.md) — ingested in batch continuation from `Credentials`
+- [Test credentials](sources/test-credentials-using-powershell-function.md) — ingested in batch continuation from `Credentials`
+- [How it works?](sources/get-cryptocurrencies-price-using-powershell.md) — ingested in batch continuation from `Crypto`
+- [`$ZoneName` `=` `'zone name'`](sources/remove-stale-dns-records-powershellbros-com.md) — ingested in batch continuation from `DNS`
+- [`$ZoneName` `=` `'Reverse lookup zone name'`](sources/remove-wrong-ptr-records-from-your-dns-powershellbros-com.md) — ingested in batch continuation from `DNS`
+- [`function` `Update-DNSAliasRecord` `{`](sources/updating-dns-alias-using-powershell-powershellbros-com.md) — ingested in batch continuation from `DNS`
+- [Converting a Desired State Configuration Script Resource to a Resource Module  Petri IT Knowledgebase(1)](sources/converting-a-desired-state-configuration-script-resource-to-a-resource-module-petri-it-knowledgebase-1.md) — ingested in batch continuation from `DSC`
+- [Converting a Desired State Configuration Script Resource to a Resource Module  Petri IT Knowledgebase](sources/converting-a-desired-state-configuration-script-resource-to-a-resource-module-petri-it-knowledgebase.md) — ingested in batch continuation from `DSC`
+- [**Class-Based DSC Resource Properties**](sources/create-programmer-style-class-based-dsc-resources-petri-it-knowledgebase.md) — ingested in batch continuation from `DSC`
+- [Separating Code from Environment](sources/dsc-configuration-data-layout-tips-and-tricks-petri-it-knowledgebase-2.md) — ingested in batch continuation from `DSC`
+- [DSC Configuration Data Layout Tips and Tricks  Petri IT Knowledgebase](sources/dsc-configuration-data-layout-tips-and-tricks-petri-it-knowledgebase.md) — ingested in batch continuation from `DSC`
+- [Desired State Configuration (DSC) is an awesome configuration management tool that is built into Windows on top of Power](sources/deploying-software-using-desired-state-configuration-petri-it-knowledgebase-2.md) — ingested in batch continuation from `DSC`
+- [Deploying Software Using Desired State Configuration  Petri IT Knowledgebase](sources/deploying-software-using-desired-state-configuration-petri-it-knowledgebase.md) — ingested in batch continuation from `DSC`
+- [Desired State Configuration (DSC): Grundlagen und Funktionsweise | WindowsPro](sources/desired-state-configuration-dsc-grundlagen-und-funktionsweise.md) — ingested in batch continuation from `DSC`
+- [**Comparing Script Resource vs. Custom Resources**](sources/extend-the-native-capabilities-of-dsc-with-the-script-resource-petri-it-knowledgebase.md) — ingested in batch continuation from `DSC`
+- [Managing Cross-Node Dependencies with Desired State Configuration  Petri IT Knowledgebase](sources/managing-cross-node-dependencies-with-desired-state-configuration-petri-it-knowledgebase.md) — ingested in batch continuation from `DSC`
+- [Testing DSC Configurations Using Pester  Petri IT Knowledgebase](sources/testing-dsc-configurations-using-pester-petri-it-knowledgebase.md) — ingested in batch continuation from `DSC`
+- [Inhaltsverzeichnis für PowerShell\00-ToInclude\PS\dsc](sources/dsc-toc.md) — ingested in batch continuation from `DSC`
+- [The PowerShell Stack collection](sources/the-powershell-stack-collection.md) — ingested in batch continuation from `DataStructures`
+- [The powershell queue collection - powershelldistrict](sources/the-powershell-queue-collection.md) — ingested in batch continuation from `DataStructures`
+- [Dell, WMI, and PowerShell](sources/dell-bios-settings-management-wmi.md) — ingested in batch continuation from `Dell`
+- [Inhaltsverzeichnis für PowerShell\Ereignisbehandlung](sources/ereignisbehandlung-toc.md) — ingested in batch continuation from `Ereignisbehandlung`
+- [Handling Events with PowerShell and .NET (Part 1)](sources/handling-events-with-powershell-and-net-part-1.md) — ingested in batch continuation from `Ereignisbehandlung`
+- [Extract IP Address](sources/extract-ip-address-from-log-lines-using-powershell-powershellbros-com.md) — ingested in batch continuation from `EventLog`
+- [Get-Eventlog](sources/powershell-one-liner-get-eventlog-powershellbros-com.md) — ingested in batch continuation from `EventLog`
+- [I recently had to scan system event log on all production servers to find out which services have been installed. In thi](sources/scan-event-log-to-find-if-service-was-installed-in-the-system-powershellbros-com.md) — ingested in batch continuation from `EventLog`
+- [Create a Pivot Table in Excel using PowerShell script - Powershellbros.com](sources/create-a-pivot-table-in-excel-using-powershell-script-powershellbros-com.md) — ingested in batch continuation from `Excel`
+- [Inhaltsverzeichnis für PowerShell\00-ToInclude\PS\Excel](sources/excel-toc.md) — ingested in batch continuation from `Excel`
+- [PowerShell 7 und Windows](sources/powershell-7-und-windows-powershell-5.md) — ingested in batch continuation from `PowerShell 7 und Windows PowerShell 5`
+- [PowerShell 7 und Windows](sources/raw.md) — ingested in batch continuation from `PowerShell 7 und Windows PowerShell 5`
+- [Practical PowerShell: Pruning File Trees and Extending Cmdlets - Simple Talk](sources/practical-powershell-pruning-file-trees-and-extending-cmdlets.md) — ingested in batch continuation from `Files`
+- [Using PowerShell to Compare / Diff Files](sources/using-powershell-to-compare-diff-files.md) — ingested in batch continuation from `Files`
+- [Working with File Catalogs in PowerShell 5.1](sources/working-with-file-catalogs-in-powershell-5-1.md) — ingested in batch continuation from `Files`
+- [A Poor Man's Profiler with PowerShell and CDB](sources/a-poor-man-s-profiler-with-powershell-and-cdb.md) — ingested in batch continuation from `Forensics`
+- [BgShell - Background Shell](sources/bgshell-background-shell.md) — ingested in batch continuation from `Forensics`
+- [Extracting Activity History from PowerShell Process Dumps](sources/extracting-activity-history-from-powershell-process-dumps.md) — ingested in batch continuation from `Forensics`
+- [Extracting Forensic Script Content from PowerShell Process Dumps](sources/extracting-forensic-script-content-from-powershell-process-dumps.md) — ingested in batch continuation from `Forensics`
+- [Scour: Fast, Personal, Local Content Searches](sources/scour-fast-personal-local-content-searches.md) — ingested in batch continuation from `Forensics`
+- [Scripting WinDbg with PowerShell](sources/scripting-windbg-with-powershell.md) — ingested in batch continuation from `Forensics`
+- [How to find events about software uninstallation?](sources/find-uninstallation-events.md) — ingested in batch continuation from `Functions`
+- [Inhaltsverzeichnis für PowerShell\Functions](sources/functions-toc.md) — ingested in batch continuation from `Functions`
+- [Graph theory with PowerShell -part 2 – Tech thoughts](sources/graph-theory-with-powershell-part-2.md) — ingested in batch continuation from `Graphs`
+- [Graph theory with PowerShell – Tech thoughts](sources/graph-theory-with-powershell.md) — ingested in batch continuation from `Graphs`
+- [A Quick Guide to Building PowerShell Async Functions](sources/a-quick-guide-to-building-powershell-async-functions.md) — ingested in batch continuation from `HowTos`
 ## Entities
 - [Active Directory](entities/ActiveDirectory.md) — Windows directory service domain for account, policy, and infrastructure automation
 - [PowerShell Classes](entities/PowerShellClasses.md) — class-based PowerShell design and implementation techniques
