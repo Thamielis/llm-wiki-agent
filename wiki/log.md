@@ -4,6 +4,10 @@ Append-only chronological record of all operations.
 
 Format: `## [YYYY-MM-DD] <operation> | <title>`
 
+## [2026-04-08] lint | Wiki health check
+## [2026-04-08] ingest | Pester
+## [2026-04-08] ingest | Pester framework for Powershell testing - part 1
+## [2026-04-08] ingest | Erstellen von Pester v5 Tests für die PowerShell-Modulentwicklung
 ## [2026-04-08] graph | Knowledge graph rebuilt
 ## [2026-04-08] ingest | Loop each user
 ## [2026-04-08] ingest | Active Directory Scripts Galore: Come and Get It!

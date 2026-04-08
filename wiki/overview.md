@@ -21,3 +21,7 @@ A fifth and sixth cluster now extend the corpus beyond development-only concerns
 
 ## Recent Batch Updates
 - 2026-04-08: Added 50 additional sources spanning AST parsing, DSC, DNS/EventLog, forensics, and operational HowTos.
+
+
+## Pester testing cluster
+Recent ingest work expanded test coverage knowledge with dedicated Pester sources that connect script-level assertions, module isolation techniques, and CI/CD reporting practices. This strengthens links between [[PowerShellTesting]], [[ContinuousIntegration]], and operational reliability work already present in the wiki.

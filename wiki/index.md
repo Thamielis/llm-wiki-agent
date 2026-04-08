@@ -6,6 +6,9 @@ This file is maintained by the LLM. Updated on every ingest.
 - [Overview](overview.md) — living synthesis across all sources
 
 ## Sources
+- [Pester](sources/pester-index.md) — table-of-contents source that maps the Pester testing subset
+- [Pester framework for Powershell testing - part 1](sources/pester-framework-for-powershell-testing-part-1.md) — introductory `Describe`/`Context`/`It` usage for workstation health checks
+- [Erstellen von Pester v5 Tests für die PowerShell-Modulentwicklung](sources/pester-v5-tests-fur-powershell.md) — advanced Pester v5 mocks, TestDrive isolation, and CI/coverage workflows
 - [Loop each user](sources/adsi-searching-for-an-user-object-in-active-directory-powershellbros-com.md) — Active Directory operations, reporting, and automation patterns
 - [Active Directory Scripts Galore: Come and Get It!](sources/active-directory-scripts-galore-come-and-get-it.md) — Active Directory operations, reporting, and automation patterns
 - [Inhaltsverzeichnis für PowerShell\00-ToInclude\PS\ActiveDirectory](sources/activedirectory-toc.md) — Active Directory operations, reporting, and automation patterns
@@ -128,6 +131,7 @@ This file is maintained by the LLM. Updated on every ingest.
 - [Graph theory with PowerShell – Tech thoughts](sources/graph-theory-with-powershell.md) — ingested in batch continuation from `Graphs`
 - [A Quick Guide to Building PowerShell Async Functions](sources/a-quick-guide-to-building-powershell-async-functions.md) — ingested in batch continuation from `HowTos`
 ## Entities
+- [Pester](entities/Pester.md) — PowerShell testing framework spanning baseline checks to v5 CI-ready module tests
 - [Active Directory](entities/ActiveDirectory.md) — Windows directory service domain for account, policy, and infrastructure automation
 - [PowerShell Classes](entities/PowerShellClasses.md) — class-based PowerShell design and implementation techniques
 - [Christopher Kuech](entities/ChristopherKuech.md) — author of the series-heavy PowerShell architecture corpus

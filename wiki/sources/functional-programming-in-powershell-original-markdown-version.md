@@ -19,8 +19,8 @@ This file is another markdown rendering of the same functional-programming artic
 > "Clean, concise PowerShell using functional abstractions"
 
 ## Connections
-- [[Functional Programming in PowerShell]] — same article represented through another markdown capture.
+- [[FunctionalProgramming]] — same article represented through another markdown capture.
 - [[FunctionalProgramming]] — same central concept as the original source page.
 
 ## Contradictions
-- Largely duplicates [[Functional Programming in PowerShell]] rather than contradicting it.
+- Largely duplicates [[FunctionalProgramming]] rather than contradicting it.
