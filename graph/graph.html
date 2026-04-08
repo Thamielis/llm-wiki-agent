@@ -1,0 +1,2942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>LLM Wiki — Knowledge Graph</title>
+<script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+<style>
+  body { margin: 0; background: #1a1a2e; font-family: sans-serif; color: #eee; }
+  #graph { width: 100vw; height: 100vh; }
+  #controls {
+    position: fixed; top: 10px; left: 10px; background: rgba(0,0,0,0.7);
+    padding: 12px; border-radius: 8px; z-index: 10; max-width: 260px;
+  }
+  #controls h3 { margin: 0 0 8px; font-size: 14px; }
+  #search { width: 100%; padding: 4px; margin-bottom: 8px; background: #333; color: #eee; border: 1px solid #555; border-radius: 4px; }
+  #info {
+    position: fixed; bottom: 10px; left: 10px; background: rgba(0,0,0,0.8);
+    padding: 12px; border-radius: 8px; z-index: 10; max-width: 320px;
+    display: none;
+  }
+  #stats { position: fixed; top: 10px; right: 10px; background: rgba(0,0,0,0.7); padding: 10px; border-radius: 8px; font-size: 12px; }
+</style>
+</head>
+<body>
+<div id="controls">
+  <h3>LLM Wiki Graph</h3>
+  <input id="search" type="text" placeholder="Search nodes..." oninput="searchNodes(this.value)">
+  <div><span style="background:#4CAF50;padding:3px 8px;margin:2px;border-radius:3px;font-size:12px">source</span><span style="background:#2196F3;padding:3px 8px;margin:2px;border-radius:3px;font-size:12px">entity</span><span style="background:#FF9800;padding:3px 8px;margin:2px;border-radius:3px;font-size:12px">concept</span><span style="background:#9C27B0;padding:3px 8px;margin:2px;border-radius:3px;font-size:12px">synthesis</span></div>
+  <div style="margin-top:8px;font-size:11px;color:#aaa">
+    <span style="background:#555;padding:2px 6px;border-radius:3px;margin-right:4px">──</span> Explicit link<br>
+    <span style="background:#FF5722;padding:2px 6px;border-radius:3px;margin-right:4px">──</span> Inferred
+  </div>
+</div>
+<div id="graph"></div>
+<div id="info">
+  <b id="info-title"></b><br>
+  <span id="info-type" style="font-size:12px;color:#aaa"></span><br>
+  <span id="info-path" style="font-size:11px;color:#666"></span>
+</div>
+<div id="stats"></div>
+<script>
+const nodes = new vis.DataSet([
+  {
+    "id": "overview",
+    "label": "Overview",
+    "type": "synthesis",
+    "color": "#8BC34A",
+    "path": "wiki/overview.md",
+    "group": 2
+  },
+  {
+    "id": "concepts/ModuleTemplates",
+    "label": "Module Templates",
+    "type": "concept",
+    "color": "#673AB7",
+    "path": "wiki/concepts/ModuleTemplates.md",
+    "group": 4
+  },
+  {
+    "id": "concepts/PowerShellDocumentation",
+    "label": "PowerShell Documentation",
+    "type": "concept",
+    "color": "#8BC34A",
+    "path": "wiki/concepts/PowerShellDocumentation.md",
+    "group": 2
+  },
+  {
+    "id": "concepts/PowerShellTesting",
+    "label": "PowerShell Testing",
+    "type": "concept",
+    "color": "#FFC107",
+    "path": "wiki/concepts/PowerShellTesting.md",
+    "group": 5
+  },
+  {
+    "id": "concepts/ADAdministration",
+    "label": "AD Administration",
+    "type": "concept",
+    "color": "#E91E63",
+    "path": "wiki/concepts/ADAdministration.md",
+    "group": 0
+  },
+  {
+    "id": "concepts/Encapsulation",
+    "label": "Encapsulation",
+    "type": "concept",
+    "color": "#8BC34A",
+    "path": "wiki/concepts/Encapsulation.md",
+    "group": 2
+  },
+  {
+    "id": "concepts/ContinuousIntegration",
+    "label": "Continuous Integration",
+    "type": "concept",
+    "color": "#FFC107",
+    "path": "wiki/concepts/ContinuousIntegration.md",
+    "group": 5
+  },
+  {
+    "id": "concepts/HigherOrderFunctions",
+    "label": "Higher-Order Functions",
+    "type": "concept",
+    "color": "#673AB7",
+    "path": "wiki/concepts/HigherOrderFunctions.md",
+    "group": 4
+  },
+  {
+    "id": "concepts/InfrastructureBootstrap",
+    "label": "Infrastructure Bootstrap",
+    "type": "concept",
+    "color": "#FFC107",
+    "path": "wiki/concepts/InfrastructureBootstrap.md",
+    "group": 5
+  },
+  {
+    "id": "concepts/CommentBasedHelp",
+    "label": "Comment-Based Help",
+    "type": "concept",
+    "color": "#8BC34A",
+    "path": "wiki/concepts/CommentBasedHelp.md",
+    "group": 2
+  },
+  {
+    "id": "concepts/InvocationOperators",
+    "label": "Invocation Operators",
+    "type": "concept",
+    "color": "#FF5722",
+    "path": "wiki/concepts/InvocationOperators.md",
+    "group": 3
+  },
+  {
+    "id": "concepts/DeclarativeProgramming",
+    "label": "Declarative Programming",
+    "type": "concept",
+    "color": "#673AB7",
+    "path": "wiki/concepts/DeclarativeProgramming.md",
+    "group": 4
+  },
+  {
+    "id": "concepts/DeclarativeDevOps",
+    "label": "Declarative DevOps",
+    "type": "concept",
+    "color": "#673AB7",
+    "path": "wiki/concepts/DeclarativeDevOps.md",
+    "group": 4
+  },
+  {
+    "id": "concepts/ObjectOrientedPowerShell",
+    "label": "Object-Oriented PowerShell",
+    "type": "concept",
+    "color": "#00BCD4",
+    "path": "wiki/concepts/ObjectOrientedPowerShell.md",
+    "group": 1
+  },
+  {
+    "id": "concepts/PowerShellModules",
+    "label": "PowerShell Modules",
+    "type": "concept",
+    "color": "#673AB7",
+    "path": "wiki/concepts/PowerShellModules.md",
+    "group": 4
+  },
+  {
+    "id": "concepts/DevOpsMicroframeworks",
+    "label": "DevOps Microframeworks",
+    "type": "concept",
+    "color": "#673AB7",
+    "path": "wiki/concepts/DevOpsMicroframeworks.md",
+    "group": 4
+  },
+  {
+    "id": "concepts/DesiredStateConfiguration",
+    "label": "Desired State Configuration",
+    "type": "concept",
+    "color": "#673AB7",
+    "path": "wiki/concepts/DesiredStateConfiguration.md",
+    "group": 4
+  },
+  {
+    "id": "concepts/AIWorkflowAutomation",
+    "label": "AI Workflow Automation",
+    "type": "concept",
+    "color": "#8BC34A",
+    "path": "wiki/concepts/AIWorkflowAutomation.md",
+    "group": 2
+  },
+  {
+    "id": "concepts/ConfigurationManagement",
+    "label": "Configuration Management",
+    "type": "concept",
+    "color": "#673AB7",
+    "path": "wiki/concepts/ConfigurationManagement.md",
+    "group": 4
+  },
+  {
+    "id": "concepts/Monads",
+    "label": "Monads",
+    "type": "concept",
+    "color": "#673AB7",
+    "path": "wiki/concepts/Monads.md",
+    "group": 4
+  },
+  {
+    "id": "concepts/PowerShellFormatting",
+    "label": "PowerShell Formatting",
+    "type": "concept",
+    "color": "#FF5722",
+    "path": "wiki/concepts/PowerShellFormatting.md",
+    "group": 3
+  },
+  {
+    "id": "concepts/MVC",
+    "label": "MVC",
+    "type": "concept",
+    "color": "#673AB7",
+    "path": "wiki/concepts/MVC.md",
+    "group": 4
+  },
+  {
+    "id": "concepts/ObjectIntrospection",
+    "label": "Object Introspection",
+    "type": "concept",
+    "color": "#FF5722",
+    "path": "wiki/concepts/ObjectIntrospection.md",
+    "group": 3
+  },
+  {
+    "id": "concepts/BuildAutomation",
+    "label": "Build Automation",
+    "type": "concept",
+    "color": "#FFC107",
+    "path": "wiki/concepts/BuildAutomation.md",
+    "group": 5
+  },
+  {
+    "id": "concepts/ScriptArchitecture",
+    "label": "Script Architecture",
+    "type": "concept",
+    "color": "#8BC34A",
+    "path": "wiki/concepts/ScriptArchitecture.md",
+    "group": 2
+  },
+  {
+    "id": "concepts/ScriptBlocks",
+    "label": "ScriptBlocks",
+    "type": "concept",
+    "color": "#FF5722",
+    "path": "wiki/concepts/ScriptBlocks.md",
+    "group": 3
+  },
+  {
+    "id": "concepts/SessionState",
+    "label": "Session State",
+    "type": "concept",
+    "color": "#FF5722",
+    "path": "wiki/concepts/SessionState.md",
+    "group": 3
+  },
+  {
+    "id": "concepts/FunctionalProgramming",
+    "label": "Functional Programming",
+    "type": "concept",
+    "color": "#673AB7",
+    "path": "wiki/concepts/FunctionalProgramming.md",
+    "group": 4
+  },
+  {
+    "id": "concepts/WorkItemAutomation",
+    "label": "Work-Item Automation",
+    "type": "concept",
+    "color": "#673AB7",
+    "path": "wiki/concepts/WorkItemAutomation.md",
+    "group": 4
+  },
+  {
+    "id": "concepts/Idempotency",
+    "label": "Idempotency",
+    "type": "concept",
+    "color": "#673AB7",
+    "path": "wiki/concepts/Idempotency.md",
+    "group": 4
+  },
+  {
+    "id": "concepts/Immutability",
+    "label": "Immutability",
+    "type": "concept",
+    "color": "#673AB7",
+    "path": "wiki/concepts/Immutability.md",
+    "group": 4
+  },
+  {
+    "id": "concepts/BinaryCmdlets",
+    "label": "Binary Cmdlets",
+    "type": "concept",
+    "color": "#8BC34A",
+    "path": "wiki/concepts/BinaryCmdlets.md",
+    "group": 2
+  },
+  {
+    "id": "concepts/ScriptOrchestration",
+    "label": "Script Orchestration",
+    "type": "concept",
+    "color": "#FFC107",
+    "path": "wiki/concepts/ScriptOrchestration.md",
+    "group": 5
+  },
+  {
+    "id": "sources/use-set-aduser-command-to-update-user-attributes-powershellbros-com",
+    "label": "Use Set-ADUser command to update user attributes - Powershellbros.com",
+    "type": "source",
+    "color": "#E91E63",
+    "path": "wiki/sources/use-set-aduser-command-to-update-user-attributes-powershellbros-com.md",
+    "group": 0
+  },
+  {
+    "id": "sources/further-down-the-rabbit-hole-powershell-modules-and-encapsulation",
+    "label": "Further Down the Rabbit Hole: PowerShell Modules and Encapsulation",
+    "type": "source",
+    "color": "#8BC34A",
+    "path": "wiki/sources/further-down-the-rabbit-hole-powershell-modules-and-encapsulation.md",
+    "group": 2
+  },
+  {
+    "id": "sources/using-group-managed-service-accounts-gmsas-for-powershell-remoting",
+    "label": "Using Group Managed Service Accounts (gMSAs) for PowerShell Remoting: A Walk-through - Amir Sayes",
+    "type": "source",
+    "color": "#E91E63",
+    "path": "wiki/sources/using-group-managed-service-accounts-gmsas-for-powershell-remoting.md",
+    "group": 0
+  },
+  {
+    "id": "sources/declarative-devops-microframeworks-series-overview",
+    "label": "Declarative DevOps Microframeworks Series Overview",
+    "type": "source",
+    "color": "#673AB7",
+    "path": "wiki/sources/declarative-devops-microframeworks-series-overview.md",
+    "group": 4
+  },
+  {
+    "id": "sources/powershell-one-liner-get-ad-user-groups-powershellbros-com",
+    "label": "PowerShell one-liner Get AD user groups - Powershellbros.com",
+    "type": "source",
+    "color": "#E91E63",
+    "path": "wiki/sources/powershell-one-liner-get-ad-user-groups-powershellbros-com.md",
+    "group": 0
+  },
+  {
+    "id": "sources/08-automating-work-item-management",
+    "label": "Automating Work-Item Management",
+    "type": "source",
+    "color": "#673AB7",
+    "path": "wiki/sources/08-automating-work-item-management.md",
+    "group": 4
+  },
+  {
+    "id": "sources/how-to-manage-active-directory-sites-with-powershell",
+    "label": "How to Manage Active Directory Sites with PowerShell",
+    "type": "source",
+    "color": "#E91E63",
+    "path": "wiki/sources/how-to-manage-active-directory-sites-with-powershell.md",
+    "group": 0
+  },
+  {
+    "id": "sources/how-to-write-powershell-modules-with-classes",
+    "label": "Introduction",
+    "type": "source",
+    "color": "#00BCD4",
+    "path": "wiki/sources/how-to-write-powershell-modules-with-classes.md",
+    "group": 1
+  },
+  {
+    "id": "sources/documenting-your-powershell-binary-cmdlets",
+    "label": "Documenting Your PowerShell Binary Cmdlets",
+    "type": "source",
+    "color": "#8BC34A",
+    "path": "wiki/sources/documenting-your-powershell-binary-cmdlets.md",
+    "group": 2
+  },
+  {
+    "id": "sources/find-duplicated-spns-in-active-directory-powershellbros-com",
+    "label": "How script works?",
+    "type": "source",
+    "color": "#E91E63",
+    "path": "wiki/sources/find-duplicated-spns-in-active-directory-powershellbros-com.md",
+    "group": 0
+  },
+  {
+    "id": "sources/adsi-searching-for-an-user-object-in-active-directory-powershellbros-com",
+    "label": "Loop each user",
+    "type": "source",
+    "color": "#E91E63",
+    "path": "wiki/sources/adsi-searching-for-an-user-object-in-active-directory-powershellbros-com.md",
+    "group": 0
+  },
+  {
+    "id": "sources/formatting-objects-without-xml",
+    "label": "Formatting Objects without XML",
+    "type": "source",
+    "color": "#FF5722",
+    "path": "wiki/sources/formatting-objects-without-xml.md",
+    "group": 3
+  },
+  {
+    "id": "sources/get-lockout-source-for-currently-locked-users-powershellbros-com",
+    "label": "Currently locked users",
+    "type": "source",
+    "color": "#E91E63",
+    "path": "wiki/sources/get-lockout-source-for-currently-locked-users-powershellbros-com.md",
+    "group": 0
+  },
+  {
+    "id": "sources/klassen-toc",
+    "label": "Inhaltsverzeichnis f\u00fcr PowerShell\\Klassen",
+    "type": "source",
+    "color": "#00BCD4",
+    "path": "wiki/sources/klassen-toc.md",
+    "group": 1
+  },
+  {
+    "id": "sources/get-domain-role-and-pc-type-from-remote-computers-powershellbros-com",
+    "label": "Domain role and PC type",
+    "type": "source",
+    "color": "#E91E63",
+    "path": "wiki/sources/get-domain-role-and-pc-type-from-remote-computers-powershellbros-com.md",
+    "group": 0
+  },
+  {
+    "id": "sources/new-to-powershell-use-classes",
+    "label": "New to PowerShell? Use Classes | by Christopher Kuech | in ITNEXT - Freedium",
+    "type": "source",
+    "color": "#00BCD4",
+    "path": "wiki/sources/new-to-powershell-use-classes.md",
+    "group": 1
+  },
+  {
+    "id": "sources/using-win32-useraccount-wmi-filter-in-powershellgroup-policies-and-what-to-avoid",
+    "label": "Related Posts",
+    "type": "source",
+    "color": "#E91E63",
+    "path": "wiki/sources/using-win32-useraccount-wmi-filter-in-powershellgroup-policies-and-what-to-avoid.md",
+    "group": 0
+  },
+  {
+    "id": "sources/powershell-and-design-patterns",
+    "label": "PowerShell Design Patterns",
+    "type": "source",
+    "color": "#00BCD4",
+    "path": "wiki/sources/powershell-and-design-patterns.md",
+    "group": 1
+  },
+  {
+    "id": "sources/creating-class-definition-from-object-part-3",
+    "label": "A PowerShell Conversion Challenge",
+    "type": "source",
+    "color": "#00BCD4",
+    "path": "wiki/sources/creating-class-definition-from-object-part-3.md",
+    "group": 1
+  },
+  {
+    "id": "sources/05-writing-maintainable-powershell",
+    "label": "Writing Maintainable PowerShell",
+    "type": "source",
+    "color": "#673AB7",
+    "path": "wiki/sources/05-writing-maintainable-powershell.md",
+    "group": 4
+  },
+  {
+    "id": "sources/about-classes",
+    "label": "ABOUT_CLASSES",
+    "type": "source",
+    "color": "#00BCD4",
+    "path": "wiki/sources/about-classes.md",
+    "group": 1
+  },
+  {
+    "id": "sources/importing-exporting-photos-ad",
+    "label": "Importing/Exporting Photos to/from Active Directory",
+    "type": "source",
+    "color": "#E91E63",
+    "path": "wiki/sources/importing-exporting-photos-ad.md",
+    "group": 0
+  },
+  {
+    "id": "sources/powershell-docs-style-guide",
+    "label": "PowerShell-Docs Style Guide",
+    "type": "source",
+    "color": "#8BC34A",
+    "path": "wiki/sources/powershell-docs-style-guide.md",
+    "group": 2
+  },
+  {
+    "id": "sources/removing-groups-and-users-from-local-admingrp",
+    "label": "Removing Groups and Users from Local Administrators Group in PowerShell",
+    "type": "source",
+    "color": "#E91E63",
+    "path": "wiki/sources/removing-groups-and-users-from-local-admingrp.md",
+    "group": 0
+  },
+  {
+    "id": "sources/creating-class-definition-from-object-part-1",
+    "label": "A PowerShell Conversion Challenge",
+    "type": "source",
+    "color": "#00BCD4",
+    "path": "wiki/sources/creating-class-definition-from-object-part-1.md",
+    "group": 1
+  },
+  {
+    "id": "sources/unified-approach-to-generating-documentation-for-powershell-cmdlets",
+    "label": "Unified Approach to Generating Documentation for PowerShell Cmdlets",
+    "type": "source",
+    "color": "#8BC34A",
+    "path": "wiki/sources/unified-approach-to-generating-documentation-for-powershell-cmdlets.md",
+    "group": 2
+  },
+  {
+    "id": "sources/bulding-powershell-command-inventory-solution",
+    "label": "Introduction",
+    "type": "source",
+    "color": "#00BCD4",
+    "path": "wiki/sources/bulding-powershell-command-inventory-solution.md",
+    "group": 1
+  },
+  {
+    "id": "sources/get-ad-system-info-remotely-using-powershell-function-powershellbros-com",
+    "label": "Get AD System",
+    "type": "source",
+    "color": "#E91E63",
+    "path": "wiki/sources/get-ad-system-info-remotely-using-powershell-function-powershellbros-com.md",
+    "group": 0
+  },
+  {
+    "id": "sources/how-to-copy-groups-membership-from-reference-account-powershellbros-com",
+    "label": "How to copy groups membership from reference account - Powershellbros.com",
+    "type": "source",
+    "color": "#E91E63",
+    "path": "wiki/sources/how-to-copy-groups-membership-from-reference-account-powershellbros-com.md",
+    "group": 0
+  },
+  {
+    "id": "sources/towards-the-perfect-build",
+    "label": "Towards the Perfect Build",
+    "type": "source",
+    "color": "#FFC107",
+    "path": "wiki/sources/towards-the-perfect-build.md",
+    "group": 5
+  },
+  {
+    "id": "sources/automate-jira-and-github-with-codex",
+    "label": "Automate Jira and GitHub with Codex",
+    "type": "source",
+    "color": "#8BC34A",
+    "path": "wiki/sources/automate-jira-and-github-with-codex.md",
+    "group": 2
+  },
+  {
+    "id": "sources/display-object-a-powershell-utility-cmdlet",
+    "label": "Display-Object: a PowerShell utility Cmdlet",
+    "type": "source",
+    "color": "#FF5722",
+    "path": "wiki/sources/display-object-a-powershell-utility-cmdlet.md",
+    "group": 3
+  },
+  {
+    "id": "sources/creating-class-definition-from-object-part-2",
+    "label": "A PowerShell Conversion Challenge",
+    "type": "source",
+    "color": "#00BCD4",
+    "path": "wiki/sources/creating-class-definition-from-object-part-2.md",
+    "group": 1
+  },
+  {
+    "id": "sources/beyond-custom-objects-create-a-net-class",
+    "label": "Beyond custom objects: Create a .NET class",
+    "type": "source",
+    "color": "#00BCD4",
+    "path": "wiki/sources/beyond-custom-objects-create-a-net-class.md",
+    "group": 1
+  },
+  {
+    "id": "sources/using-c-to-create-powershell-cmdlets-the-basics",
+    "label": "Using C to Create PowerShell Cmdlets: The Basics",
+    "type": "source",
+    "color": "#8BC34A",
+    "path": "wiki/sources/using-c-to-create-powershell-cmdlets-the-basics.md",
+    "group": 2
+  },
+  {
+    "id": "sources/unlocking-powershell-classes-an-in-depth-overview-and-guide-for-beginners",
+    "label": "Unlocking PowerShell Classes: An In-Depth Overview and Guide for Beginners",
+    "type": "source",
+    "color": "#00BCD4",
+    "path": "wiki/sources/unlocking-powershell-classes-an-in-depth-overview-and-guide-for-beginners.md",
+    "group": 1
+  },
+  {
+    "id": "sources/functional-programming-in-powershell-the-startup-version",
+    "label": "Functional Programming in PowerShell - The Startup Version",
+    "type": "source",
+    "color": "#673AB7",
+    "path": "wiki/sources/functional-programming-in-powershell-the-startup-version.md",
+    "group": 4
+  },
+  {
+    "id": "sources/06-declarative-config-management",
+    "label": "Declarative Config Management",
+    "type": "source",
+    "color": "#673AB7",
+    "path": "wiki/sources/06-declarative-config-management.md",
+    "group": 4
+  },
+  {
+    "id": "sources/using-group-managed-service-accounts-gmsas-for-powershell-remoting-a-walk-through-amir-sayes",
+    "label": "Using Group Managed Service Accounts (gMSAs) for PowerShell Remoting: A Walk-through - Amir Sayes",
+    "type": "source",
+    "color": "#E91E63",
+    "path": "wiki/sources/using-group-managed-service-accounts-gmsas-for-powershell-remoting-a-walk-through-amir-sayes.md",
+    "group": 0
+  },
+  {
+    "id": "sources/using-powershell-to-export-gpos-to-create-a-fancy-gpo-report",
+    "label": "Using PowerShell to Export GPOs to Create a Fancy GPO Report",
+    "type": "source",
+    "color": "#E91E63",
+    "path": "wiki/sources/using-powershell-to-export-gpos-to-create-a-fancy-gpo-report.md",
+    "group": 0
+  },
+  {
+    "id": "sources/01-functional-programming-in-powershell",
+    "label": "Functional Programming in PowerShell",
+    "type": "source",
+    "color": "#673AB7",
+    "path": "wiki/sources/01-functional-programming-in-powershell.md",
+    "group": 4
+  },
+  {
+    "id": "sources/powershell-v5-classes-and-concepts",
+    "label": "Abstract",
+    "type": "source",
+    "color": "#00BCD4",
+    "path": "wiki/sources/powershell-v5-classes-and-concepts.md",
+    "group": 1
+  },
+  {
+    "id": "sources/powershell-one-liner-find-ad-user-based-on-property-powershellbros-com",
+    "label": "PowerShell one-liner Find AD user based on property - Powershellbros.com",
+    "type": "source",
+    "color": "#E91E63",
+    "path": "wiki/sources/powershell-one-liner-find-ad-user-based-on-property-powershellbros-com.md",
+    "group": 0
+  },
+  {
+    "id": "sources/04-private-powershell-modules",
+    "label": "Private PowerShell Modules",
+    "type": "source",
+    "color": "#673AB7",
+    "path": "wiki/sources/04-private-powershell-modules.md",
+    "group": 4
+  },
+  {
+    "id": "sources/functional-powershell-with-classes",
+    "label": "Functional PowerShell with Classes",
+    "type": "source",
+    "color": "#00BCD4",
+    "path": "wiki/sources/functional-powershell-with-classes.md",
+    "group": 1
+  },
+  {
+    "id": "sources/the-powershell-script-orchestrator",
+    "label": "The PowerShell Script Orchestrator",
+    "type": "source",
+    "color": "#FFC107",
+    "path": "wiki/sources/the-powershell-script-orchestrator.md",
+    "group": 5
+  },
+  {
+    "id": "sources/development-index",
+    "label": "Development Index",
+    "type": "source",
+    "color": "#8BC34A",
+    "path": "wiki/sources/development-index.md",
+    "group": 2
+  },
+  {
+    "id": "sources/03-devops-microframeworks",
+    "label": "DevOps Microframeworks",
+    "type": "source",
+    "color": "#673AB7",
+    "path": "wiki/sources/03-devops-microframeworks.md",
+    "group": 4
+  },
+  {
+    "id": "sources/add-users-to-local-group-remotely-using-powershell-powershellbros-com",
+    "label": "Add users to local group remotely",
+    "type": "source",
+    "color": "#E91E63",
+    "path": "wiki/sources/add-users-to-local-group-remotely-using-powershell-powershellbros-com.md",
+    "group": 0
+  },
+  {
+    "id": "sources/top-20-powershell-modul-und-skriptvorlagen",
+    "label": "Top 20 PowerShell Modul- und Skriptvorlagen",
+    "type": "source",
+    "color": "#673AB7",
+    "path": "wiki/sources/top-20-powershell-modul-und-skriptvorlagen.md",
+    "group": 4
+  },
+  {
+    "id": "sources/software-design-patterns-in-powershell-strategy-pattern",
+    "label": "Software Design Patterns in PowerShell",
+    "type": "source",
+    "color": "#00BCD4",
+    "path": "wiki/sources/software-design-patterns-in-powershell-strategy-pattern.md",
+    "group": 1
+  },
+  {
+    "id": "sources/playing-with-classes-in-powershell-v5-preview",
+    "label": "Playing with Classes in PowerShell v5 Preview",
+    "type": "source",
+    "color": "#00BCD4",
+    "path": "wiki/sources/playing-with-classes-in-powershell-v5-preview.md",
+    "group": 1
+  },
+  {
+    "id": "sources/activedirectory-toc",
+    "label": "Inhaltsverzeichnis f\u00fcr PowerShell\\00-ToInclude\\PS\\ActiveDirectory",
+    "type": "source",
+    "color": "#E91E63",
+    "path": "wiki/sources/activedirectory-toc.md",
+    "group": 0
+  },
+  {
+    "id": "sources/powershell-classes-your-ultimate-guidepowershell-classes-your-ultimate-guide",
+    "label": "PowerShell Classes - Your Ultimate Guide - Petri IT Knowledgebase",
+    "type": "source",
+    "color": "#00BCD4",
+    "path": "wiki/sources/powershell-classes-your-ultimate-guidepowershell-classes-your-ultimate-guide.md",
+    "group": 1
+  },
+  {
+    "id": "sources/testing-powershell-classes",
+    "label": "Save as myClassType.psm1",
+    "type": "source",
+    "color": "#00BCD4",
+    "path": "wiki/sources/testing-powershell-classes.md",
+    "group": 1
+  },
+  {
+    "id": "sources/powershell-command-inventory-part-deux",
+    "label": "Introduction",
+    "type": "source",
+    "color": "#00BCD4",
+    "path": "wiki/sources/powershell-command-inventory-part-deux.md",
+    "group": 1
+  },
+  {
+    "id": "sources/powershell-server-inventory-part-3-viewing-the-inventory-using-a-ui",
+    "label": "PowerShell Server Inventory, Part 3: Viewing the Inventory using a UI",
+    "type": "source",
+    "color": "#E91E63",
+    "path": "wiki/sources/powershell-server-inventory-part-3-viewing-the-inventory-using-a-ui.md",
+    "group": 0
+  },
+  {
+    "id": "sources/basic-dc-health-email-report-via-powershell-powershellbros-com",
+    "label": "Basic DC health email report via PowerShell - Powershellbros.com",
+    "type": "source",
+    "color": "#E91E63",
+    "path": "wiki/sources/basic-dc-health-email-report-via-powershell-powershellbros-com.md",
+    "group": 0
+  },
+  {
+    "id": "sources/powershell-classes-your-ultimate-guide-de",
+    "label": "PowerShell-Klassen \u2013 Ihr ultimativer Leitfaden \u2013 Petri IT Knowledgebase",
+    "type": "source",
+    "color": "#00BCD4",
+    "path": "wiki/sources/powershell-classes-your-ultimate-guide-de.md",
+    "group": 1
+  },
+  {
+    "id": "sources/how-to-document-your-powershell-library",
+    "label": "How To Document Your PowerShell Library",
+    "type": "source",
+    "color": "#8BC34A",
+    "path": "wiki/sources/how-to-document-your-powershell-library.md",
+    "group": 2
+  },
+  {
+    "id": "sources/02-declarative-devops",
+    "label": "Declarative DevOps",
+    "type": "source",
+    "color": "#673AB7",
+    "path": "wiki/sources/02-declarative-devops.md",
+    "group": 4
+  },
+  {
+    "id": "sources/functional-programming-in-powershell-original-markdown-version",
+    "label": "Functional Programming in PowerShell - Original Markdown Version",
+    "type": "source",
+    "color": "#673AB7",
+    "path": "wiki/sources/functional-programming-in-powershell-original-markdown-version.md",
+    "group": 4
+  },
+  {
+    "id": "sources/script-to-query-active-directory",
+    "label": "Active Directory \u00bb Get-Blog : Ryan's PowerShell Blog",
+    "type": "source",
+    "color": "#E91E63",
+    "path": "wiki/sources/script-to-query-active-directory.md",
+    "group": 0
+  },
+  {
+    "id": "sources/active-directory-scripts-galore-come-and-get-it",
+    "label": "Active Directory Scripts Galore: Come and Get It!",
+    "type": "source",
+    "color": "#E91E63",
+    "path": "wiki/sources/active-directory-scripts-galore-come-and-get-it.md",
+    "group": 0
+  },
+  {
+    "id": "sources/07-declarative-idempotency",
+    "label": "Declarative Idempotency",
+    "type": "source",
+    "color": "#673AB7",
+    "path": "wiki/sources/07-declarative-idempotency.md",
+    "group": 4
+  },
+  {
+    "id": "sources/invocation-operators-states-and-scopes",
+    "label": "Invocation Operators, States and Scopes",
+    "type": "source",
+    "color": "#FF5722",
+    "path": "wiki/sources/invocation-operators-states-and-scopes.md",
+    "group": 3
+  },
+  {
+    "id": "sources/powershell-classes-and-concepts",
+    "label": "Introduction",
+    "type": "source",
+    "color": "#00BCD4",
+    "path": "wiki/sources/powershell-classes-and-concepts.md",
+    "group": 1
+  },
+  {
+    "id": "sources/how-to-create-a-group-managed-service-accounts-gmsa",
+    "label": "**Basic concepts** [#][1]",
+    "type": "source",
+    "color": "#E91E63",
+    "path": "wiki/sources/how-to-create-a-group-managed-service-accounts-gmsa.md",
+    "group": 0
+  },
+  {
+    "id": "sources/how-to-write-better-powershell-scripts-architecture-and-best-practices",
+    "label": "How to Write Better PowerShell Scripts: Architecture and Best Practices",
+    "type": "source",
+    "color": "#FFC107",
+    "path": "wiki/sources/how-to-write-better-powershell-scripts-architecture-and-best-practices.md",
+    "group": 5
+  },
+  {
+    "id": "sources/powershell-v5-classes-and-concepts-html",
+    "label": "Abstract",
+    "type": "source",
+    "color": "#00BCD4",
+    "path": "wiki/sources/powershell-v5-classes-and-concepts-html.md",
+    "group": 1
+  },
+  {
+    "id": "entities/Codex",
+    "label": "Codex",
+    "type": "entity",
+    "color": "#8BC34A",
+    "path": "wiki/entities/Codex.md",
+    "group": 2
+  },
+  {
+    "id": "entities/GitHubActions",
+    "label": "GitHub Actions",
+    "type": "entity",
+    "color": "#8BC34A",
+    "path": "wiki/entities/GitHubActions.md",
+    "group": 2
+  },
+  {
+    "id": "entities/DeclarativeDevOpsMicroframeworks",
+    "label": "Declarative DevOps Microframeworks",
+    "type": "entity",
+    "color": "#673AB7",
+    "path": "wiki/entities/DeclarativeDevOpsMicroframeworks.md",
+    "group": 4
+  },
+  {
+    "id": "entities/ActiveDirectory",
+    "label": "Active Directory",
+    "type": "entity",
+    "color": "#E91E63",
+    "path": "wiki/entities/ActiveDirectory.md",
+    "group": 0
+  },
+  {
+    "id": "entities/PlatyPS",
+    "label": "PlatyPS",
+    "type": "entity",
+    "color": "#8BC34A",
+    "path": "wiki/entities/PlatyPS.md",
+    "group": 2
+  },
+  {
+    "id": "entities/PatrickMeinecke",
+    "label": "Patrick Meinecke",
+    "type": "entity",
+    "color": "#FF5722",
+    "path": "wiki/entities/PatrickMeinecke.md",
+    "group": 3
+  },
+  {
+    "id": "entities/AdamBertram",
+    "label": "Adam Bertram",
+    "type": "entity",
+    "color": "#FFC107",
+    "path": "wiki/entities/AdamBertram.md",
+    "group": 5
+  },
+  {
+    "id": "entities/PowerShell",
+    "label": "PowerShell",
+    "type": "entity",
+    "color": "#E91E63",
+    "path": "wiki/entities/PowerShell.md",
+    "group": 0
+  },
+  {
+    "id": "entities/PhilFactor",
+    "label": "Phil Factor",
+    "type": "entity",
+    "color": "#FF5722",
+    "path": "wiki/entities/PhilFactor.md",
+    "group": 3
+  },
+  {
+    "id": "entities/ConfigSets",
+    "label": "ConfigSets",
+    "type": "entity",
+    "color": "#673AB7",
+    "path": "wiki/entities/ConfigSets.md",
+    "group": 4
+  },
+  {
+    "id": "entities/MattWrock",
+    "label": "Matt Wrock",
+    "type": "entity",
+    "color": "#FFC107",
+    "path": "wiki/entities/MattWrock.md",
+    "group": 5
+  },
+  {
+    "id": "entities/DocTreeGenerator",
+    "label": "DocTreeGenerator",
+    "type": "entity",
+    "color": "#8BC34A",
+    "path": "wiki/entities/DocTreeGenerator.md",
+    "group": 2
+  },
+  {
+    "id": "entities/PowerShellClasses",
+    "label": "PowerShell Classes",
+    "type": "entity",
+    "color": "#00BCD4",
+    "path": "wiki/entities/PowerShellClasses.md",
+    "group": 1
+  },
+  {
+    "id": "entities/Requirements",
+    "label": "Requirements",
+    "type": "entity",
+    "color": "#673AB7",
+    "path": "wiki/entities/Requirements.md",
+    "group": 4
+  },
+  {
+    "id": "entities/XmlDoc2CmdletDoc",
+    "label": "XmlDoc2CmdletDoc",
+    "type": "entity",
+    "color": "#8BC34A",
+    "path": "wiki/entities/XmlDoc2CmdletDoc.md",
+    "group": 2
+  },
+  {
+    "id": "entities/EmanueleBartolesi",
+    "label": "Emanuele Bartolesi",
+    "type": "entity",
+    "color": "#FFC107",
+    "path": "wiki/entities/EmanueleBartolesi.md",
+    "group": 5
+  },
+  {
+    "id": "entities/ChristopherKuech",
+    "label": "Christopher Kuech",
+    "type": "entity",
+    "color": "#673AB7",
+    "path": "wiki/entities/ChristopherKuech.md",
+    "group": 4
+  },
+  {
+    "id": "entities/MichaelSorens",
+    "label": "Michael Sorens",
+    "type": "entity",
+    "color": "#8BC34A",
+    "path": "wiki/entities/MichaelSorens.md",
+    "group": 2
+  },
+  {
+    "id": "entities/Jira",
+    "label": "Jira",
+    "type": "entity",
+    "color": "#8BC34A",
+    "path": "wiki/entities/Jira.md",
+    "group": 2
+  }
+]);
+const edges = new vis.DataSet([
+  {
+    "from": "overview",
+    "to": "entities/GitHubActions",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "overview",
+    "to": "concepts/DevOpsMicroframeworks",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "overview",
+    "to": "entities/Codex",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "overview",
+    "to": "concepts/Encapsulation",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "overview",
+    "to": "concepts/DeclarativeProgramming",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "overview",
+    "to": "concepts/PowerShellDocumentation",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "overview",
+    "to": "concepts/Idempotency",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "overview",
+    "to": "concepts/PowerShellModules",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "overview",
+    "to": "entities/Jira",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "overview",
+    "to": "concepts/FunctionalProgramming",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "overview",
+    "to": "concepts/SessionState",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "overview",
+    "to": "entities/DeclarativeDevOpsMicroframeworks",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "overview",
+    "to": "entities/PlatyPS",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/use-set-aduser-command-to-update-user-attributes-powershellbros-com",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/use-set-aduser-command-to-update-user-attributes-powershellbros-com",
+    "to": "entities/ActiveDirectory",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/use-set-aduser-command-to-update-user-attributes-powershellbros-com",
+    "to": "concepts/ADAdministration",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/further-down-the-rabbit-hole-powershell-modules-and-encapsulation",
+    "to": "concepts/CommentBasedHelp",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/further-down-the-rabbit-hole-powershell-modules-and-encapsulation",
+    "to": "concepts/PowerShellModules",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/further-down-the-rabbit-hole-powershell-modules-and-encapsulation",
+    "to": "concepts/Encapsulation",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/further-down-the-rabbit-hole-powershell-modules-and-encapsulation",
+    "to": "entities/MichaelSorens",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/using-group-managed-service-accounts-gmsas-for-powershell-remoting",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/using-group-managed-service-accounts-gmsas-for-powershell-remoting",
+    "to": "entities/ActiveDirectory",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/using-group-managed-service-accounts-gmsas-for-powershell-remoting",
+    "to": "concepts/ADAdministration",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/declarative-devops-microframeworks-series-overview",
+    "to": "concepts/DevOpsMicroframeworks",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/declarative-devops-microframeworks-series-overview",
+    "to": "concepts/DeclarativeDevOps",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/declarative-devops-microframeworks-series-overview",
+    "to": "concepts/FunctionalProgramming",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/declarative-devops-microframeworks-series-overview",
+    "to": "entities/DeclarativeDevOpsMicroframeworks",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/powershell-one-liner-get-ad-user-groups-powershellbros-com",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/powershell-one-liner-get-ad-user-groups-powershellbros-com",
+    "to": "entities/ActiveDirectory",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/powershell-one-liner-get-ad-user-groups-powershellbros-com",
+    "to": "concepts/ADAdministration",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/08-automating-work-item-management",
+    "to": "concepts/HigherOrderFunctions",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/08-automating-work-item-management",
+    "to": "concepts/WorkItemAutomation",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/08-automating-work-item-management",
+    "to": "concepts/FunctionalProgramming",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/08-automating-work-item-management",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/08-automating-work-item-management",
+    "to": "entities/ChristopherKuech",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/08-automating-work-item-management",
+    "to": "entities/DeclarativeDevOpsMicroframeworks",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/how-to-manage-active-directory-sites-with-powershell",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/how-to-manage-active-directory-sites-with-powershell",
+    "to": "entities/ActiveDirectory",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/how-to-manage-active-directory-sites-with-powershell",
+    "to": "concepts/ADAdministration",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/how-to-write-powershell-modules-with-classes",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/how-to-write-powershell-modules-with-classes",
+    "to": "concepts/ObjectOrientedPowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/how-to-write-powershell-modules-with-classes",
+    "to": "entities/PowerShellClasses",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/documenting-your-powershell-binary-cmdlets",
+    "to": "entities/XmlDoc2CmdletDoc",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/documenting-your-powershell-binary-cmdlets",
+    "to": "concepts/BinaryCmdlets",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/documenting-your-powershell-binary-cmdlets",
+    "to": "concepts/PowerShellDocumentation",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/documenting-your-powershell-binary-cmdlets",
+    "to": "entities/MichaelSorens",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/find-duplicated-spns-in-active-directory-powershellbros-com",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/find-duplicated-spns-in-active-directory-powershellbros-com",
+    "to": "entities/ActiveDirectory",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/find-duplicated-spns-in-active-directory-powershellbros-com",
+    "to": "concepts/ADAdministration",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/adsi-searching-for-an-user-object-in-active-directory-powershellbros-com",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/adsi-searching-for-an-user-object-in-active-directory-powershellbros-com",
+    "to": "entities/ActiveDirectory",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/adsi-searching-for-an-user-object-in-active-directory-powershellbros-com",
+    "to": "concepts/ADAdministration",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/formatting-objects-without-xml",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/formatting-objects-without-xml",
+    "to": "concepts/ObjectIntrospection",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/formatting-objects-without-xml",
+    "to": "concepts/PowerShellFormatting",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/formatting-objects-without-xml",
+    "to": "entities/PatrickMeinecke",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/get-lockout-source-for-currently-locked-users-powershellbros-com",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/get-lockout-source-for-currently-locked-users-powershellbros-com",
+    "to": "entities/ActiveDirectory",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/get-lockout-source-for-currently-locked-users-powershellbros-com",
+    "to": "concepts/ADAdministration",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/klassen-toc",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/klassen-toc",
+    "to": "concepts/ObjectOrientedPowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/klassen-toc",
+    "to": "entities/PowerShellClasses",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/get-domain-role-and-pc-type-from-remote-computers-powershellbros-com",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/get-domain-role-and-pc-type-from-remote-computers-powershellbros-com",
+    "to": "entities/ActiveDirectory",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/get-domain-role-and-pc-type-from-remote-computers-powershellbros-com",
+    "to": "concepts/ADAdministration",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/new-to-powershell-use-classes",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/new-to-powershell-use-classes",
+    "to": "concepts/ObjectOrientedPowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/new-to-powershell-use-classes",
+    "to": "entities/PowerShellClasses",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/using-win32-useraccount-wmi-filter-in-powershellgroup-policies-and-what-to-avoid",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/using-win32-useraccount-wmi-filter-in-powershellgroup-policies-and-what-to-avoid",
+    "to": "entities/ActiveDirectory",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/using-win32-useraccount-wmi-filter-in-powershellgroup-policies-and-what-to-avoid",
+    "to": "concepts/ADAdministration",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/powershell-and-design-patterns",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/powershell-and-design-patterns",
+    "to": "concepts/ObjectOrientedPowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/powershell-and-design-patterns",
+    "to": "entities/PowerShellClasses",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/creating-class-definition-from-object-part-3",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/creating-class-definition-from-object-part-3",
+    "to": "concepts/ObjectOrientedPowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/creating-class-definition-from-object-part-3",
+    "to": "entities/PowerShellClasses",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/05-writing-maintainable-powershell",
+    "to": "concepts/DevOpsMicroframeworks",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/05-writing-maintainable-powershell",
+    "to": "concepts/FunctionalProgramming",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/05-writing-maintainable-powershell",
+    "to": "concepts/MVC",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/05-writing-maintainable-powershell",
+    "to": "concepts/PowerShellModules",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/05-writing-maintainable-powershell",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/05-writing-maintainable-powershell",
+    "to": "entities/ChristopherKuech",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/05-writing-maintainable-powershell",
+    "to": "entities/DeclarativeDevOpsMicroframeworks",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/about-classes",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/about-classes",
+    "to": "concepts/ObjectOrientedPowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/about-classes",
+    "to": "entities/PowerShellClasses",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/importing-exporting-photos-ad",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/importing-exporting-photos-ad",
+    "to": "entities/ActiveDirectory",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/importing-exporting-photos-ad",
+    "to": "concepts/ADAdministration",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/powershell-docs-style-guide",
+    "to": "concepts/PowerShellDocumentation",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/powershell-docs-style-guide",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/powershell-docs-style-guide",
+    "to": "concepts/CommentBasedHelp",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/powershell-docs-style-guide",
+    "to": "entities/PlatyPS",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/removing-groups-and-users-from-local-admingrp",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/removing-groups-and-users-from-local-admingrp",
+    "to": "entities/ActiveDirectory",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/removing-groups-and-users-from-local-admingrp",
+    "to": "concepts/ADAdministration",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/creating-class-definition-from-object-part-1",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/creating-class-definition-from-object-part-1",
+    "to": "concepts/ObjectOrientedPowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/creating-class-definition-from-object-part-1",
+    "to": "entities/PowerShellClasses",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/unified-approach-to-generating-documentation-for-powershell-cmdlets",
+    "to": "entities/XmlDoc2CmdletDoc",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/unified-approach-to-generating-documentation-for-powershell-cmdlets",
+    "to": "entities/MichaelSorens",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/unified-approach-to-generating-documentation-for-powershell-cmdlets",
+    "to": "concepts/PowerShellDocumentation",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/unified-approach-to-generating-documentation-for-powershell-cmdlets",
+    "to": "entities/DocTreeGenerator",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/bulding-powershell-command-inventory-solution",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/bulding-powershell-command-inventory-solution",
+    "to": "concepts/ObjectOrientedPowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/bulding-powershell-command-inventory-solution",
+    "to": "entities/PowerShellClasses",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/get-ad-system-info-remotely-using-powershell-function-powershellbros-com",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/get-ad-system-info-remotely-using-powershell-function-powershellbros-com",
+    "to": "entities/ActiveDirectory",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/get-ad-system-info-remotely-using-powershell-function-powershellbros-com",
+    "to": "concepts/ADAdministration",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/how-to-copy-groups-membership-from-reference-account-powershellbros-com",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/how-to-copy-groups-membership-from-reference-account-powershellbros-com",
+    "to": "entities/ActiveDirectory",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/how-to-copy-groups-membership-from-reference-account-powershellbros-com",
+    "to": "concepts/ADAdministration",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/towards-the-perfect-build",
+    "to": "entities/MattWrock",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/towards-the-perfect-build",
+    "to": "concepts/PowerShellTesting",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/towards-the-perfect-build",
+    "to": "concepts/InfrastructureBootstrap",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/towards-the-perfect-build",
+    "to": "concepts/BuildAutomation",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/towards-the-perfect-build",
+    "to": "concepts/ContinuousIntegration",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/automate-jira-and-github-with-codex",
+    "to": "entities/GitHubActions",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/automate-jira-and-github-with-codex",
+    "to": "entities/Codex",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/automate-jira-and-github-with-codex",
+    "to": "concepts/AIWorkflowAutomation",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/automate-jira-and-github-with-codex",
+    "to": "entities/Jira",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/display-object-a-powershell-utility-cmdlet",
+    "to": "entities/PhilFactor",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/display-object-a-powershell-utility-cmdlet",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/display-object-a-powershell-utility-cmdlet",
+    "to": "concepts/ObjectIntrospection",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/display-object-a-powershell-utility-cmdlet",
+    "to": "concepts/ScriptBlocks",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/creating-class-definition-from-object-part-2",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/creating-class-definition-from-object-part-2",
+    "to": "concepts/ObjectOrientedPowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/creating-class-definition-from-object-part-2",
+    "to": "entities/PowerShellClasses",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/beyond-custom-objects-create-a-net-class",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/beyond-custom-objects-create-a-net-class",
+    "to": "concepts/ObjectOrientedPowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/beyond-custom-objects-create-a-net-class",
+    "to": "entities/PowerShellClasses",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/using-c-to-create-powershell-cmdlets-the-basics",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/using-c-to-create-powershell-cmdlets-the-basics",
+    "to": "concepts/BinaryCmdlets",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/using-c-to-create-powershell-cmdlets-the-basics",
+    "to": "concepts/PowerShellDocumentation",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/using-c-to-create-powershell-cmdlets-the-basics",
+    "to": "entities/MichaelSorens",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/unlocking-powershell-classes-an-in-depth-overview-and-guide-for-beginners",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/unlocking-powershell-classes-an-in-depth-overview-and-guide-for-beginners",
+    "to": "concepts/ObjectOrientedPowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/unlocking-powershell-classes-an-in-depth-overview-and-guide-for-beginners",
+    "to": "entities/PowerShellClasses",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/functional-programming-in-powershell-the-startup-version",
+    "to": "concepts/HigherOrderFunctions",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/functional-programming-in-powershell-the-startup-version",
+    "to": "concepts/ScriptBlocks",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/functional-programming-in-powershell-the-startup-version",
+    "to": "concepts/FunctionalProgramming",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/06-declarative-config-management",
+    "to": "concepts/ConfigurationManagement",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/06-declarative-config-management",
+    "to": "concepts/DeclarativeDevOps",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/06-declarative-config-management",
+    "to": "concepts/Idempotency",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/06-declarative-config-management",
+    "to": "entities/ConfigSets",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/06-declarative-config-management",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/06-declarative-config-management",
+    "to": "entities/ChristopherKuech",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/06-declarative-config-management",
+    "to": "entities/DeclarativeDevOpsMicroframeworks",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/using-group-managed-service-accounts-gmsas-for-powershell-remoting-a-walk-through-amir-sayes",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/using-group-managed-service-accounts-gmsas-for-powershell-remoting-a-walk-through-amir-sayes",
+    "to": "entities/ActiveDirectory",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/using-group-managed-service-accounts-gmsas-for-powershell-remoting-a-walk-through-amir-sayes",
+    "to": "concepts/ADAdministration",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/using-powershell-to-export-gpos-to-create-a-fancy-gpo-report",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/using-powershell-to-export-gpos-to-create-a-fancy-gpo-report",
+    "to": "entities/ActiveDirectory",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/using-powershell-to-export-gpos-to-create-a-fancy-gpo-report",
+    "to": "concepts/ADAdministration",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/01-functional-programming-in-powershell",
+    "to": "concepts/Monads",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/01-functional-programming-in-powershell",
+    "to": "concepts/Immutability",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/01-functional-programming-in-powershell",
+    "to": "concepts/HigherOrderFunctions",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/01-functional-programming-in-powershell",
+    "to": "concepts/FunctionalProgramming",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/01-functional-programming-in-powershell",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/01-functional-programming-in-powershell",
+    "to": "concepts/ScriptBlocks",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/01-functional-programming-in-powershell",
+    "to": "entities/ChristopherKuech",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/01-functional-programming-in-powershell",
+    "to": "entities/DeclarativeDevOpsMicroframeworks",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/powershell-v5-classes-and-concepts",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/powershell-v5-classes-and-concepts",
+    "to": "concepts/ObjectOrientedPowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/powershell-v5-classes-and-concepts",
+    "to": "entities/PowerShellClasses",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/powershell-one-liner-find-ad-user-based-on-property-powershellbros-com",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/powershell-one-liner-find-ad-user-based-on-property-powershellbros-com",
+    "to": "entities/ActiveDirectory",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/powershell-one-liner-find-ad-user-based-on-property-powershellbros-com",
+    "to": "concepts/ADAdministration",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/04-private-powershell-modules",
+    "to": "concepts/DevOpsMicroframeworks",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/04-private-powershell-modules",
+    "to": "concepts/PowerShellModules",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/04-private-powershell-modules",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/04-private-powershell-modules",
+    "to": "entities/ChristopherKuech",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/04-private-powershell-modules",
+    "to": "entities/DeclarativeDevOpsMicroframeworks",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/functional-powershell-with-classes",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/functional-powershell-with-classes",
+    "to": "concepts/ObjectOrientedPowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/functional-powershell-with-classes",
+    "to": "entities/PowerShellClasses",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/the-powershell-script-orchestrator",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/the-powershell-script-orchestrator",
+    "to": "entities/AdamBertram",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/the-powershell-script-orchestrator",
+    "to": "concepts/ScriptOrchestration",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/the-powershell-script-orchestrator",
+    "to": "concepts/InfrastructureBootstrap",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/development-index",
+    "to": "concepts/PowerShellDocumentation",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/development-index",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/development-index",
+    "to": "entities/DeclarativeDevOpsMicroframeworks",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/03-devops-microframeworks",
+    "to": "concepts/DevOpsMicroframeworks",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/03-devops-microframeworks",
+    "to": "concepts/PowerShellModules",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/03-devops-microframeworks",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/03-devops-microframeworks",
+    "to": "entities/ChristopherKuech",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/03-devops-microframeworks",
+    "to": "entities/DeclarativeDevOpsMicroframeworks",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/add-users-to-local-group-remotely-using-powershell-powershellbros-com",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/add-users-to-local-group-remotely-using-powershell-powershellbros-com",
+    "to": "entities/ActiveDirectory",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/add-users-to-local-group-remotely-using-powershell-powershellbros-com",
+    "to": "concepts/ADAdministration",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/top-20-powershell-modul-und-skriptvorlagen",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/top-20-powershell-modul-und-skriptvorlagen",
+    "to": "concepts/PowerShellModules",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/top-20-powershell-modul-und-skriptvorlagen",
+    "to": "concepts/ModuleTemplates",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/software-design-patterns-in-powershell-strategy-pattern",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/software-design-patterns-in-powershell-strategy-pattern",
+    "to": "concepts/ObjectOrientedPowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/software-design-patterns-in-powershell-strategy-pattern",
+    "to": "entities/PowerShellClasses",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/playing-with-classes-in-powershell-v5-preview",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/playing-with-classes-in-powershell-v5-preview",
+    "to": "concepts/ObjectOrientedPowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/playing-with-classes-in-powershell-v5-preview",
+    "to": "entities/PowerShellClasses",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/activedirectory-toc",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/activedirectory-toc",
+    "to": "entities/ActiveDirectory",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/activedirectory-toc",
+    "to": "concepts/ADAdministration",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/powershell-classes-your-ultimate-guidepowershell-classes-your-ultimate-guide",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/powershell-classes-your-ultimate-guidepowershell-classes-your-ultimate-guide",
+    "to": "concepts/ObjectOrientedPowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/powershell-classes-your-ultimate-guidepowershell-classes-your-ultimate-guide",
+    "to": "entities/PowerShellClasses",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/testing-powershell-classes",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/testing-powershell-classes",
+    "to": "concepts/ObjectOrientedPowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/testing-powershell-classes",
+    "to": "entities/PowerShellClasses",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/powershell-command-inventory-part-deux",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/powershell-command-inventory-part-deux",
+    "to": "concepts/ObjectOrientedPowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/powershell-command-inventory-part-deux",
+    "to": "entities/PowerShellClasses",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/powershell-server-inventory-part-3-viewing-the-inventory-using-a-ui",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/powershell-server-inventory-part-3-viewing-the-inventory-using-a-ui",
+    "to": "entities/ActiveDirectory",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/powershell-server-inventory-part-3-viewing-the-inventory-using-a-ui",
+    "to": "concepts/ADAdministration",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/basic-dc-health-email-report-via-powershell-powershellbros-com",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/basic-dc-health-email-report-via-powershell-powershellbros-com",
+    "to": "entities/ActiveDirectory",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/basic-dc-health-email-report-via-powershell-powershellbros-com",
+    "to": "concepts/ADAdministration",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/powershell-classes-your-ultimate-guide-de",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/powershell-classes-your-ultimate-guide-de",
+    "to": "concepts/ObjectOrientedPowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/powershell-classes-your-ultimate-guide-de",
+    "to": "entities/PowerShellClasses",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/how-to-document-your-powershell-library",
+    "to": "concepts/ScriptArchitecture",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/how-to-document-your-powershell-library",
+    "to": "entities/DocTreeGenerator",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/how-to-document-your-powershell-library",
+    "to": "concepts/PowerShellDocumentation",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/how-to-document-your-powershell-library",
+    "to": "entities/MichaelSorens",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/02-declarative-devops",
+    "to": "concepts/ConfigurationManagement",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/02-declarative-devops",
+    "to": "concepts/DeclarativeDevOps",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/02-declarative-devops",
+    "to": "concepts/DeclarativeProgramming",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/02-declarative-devops",
+    "to": "concepts/Idempotency",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/02-declarative-devops",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/02-declarative-devops",
+    "to": "entities/ChristopherKuech",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/02-declarative-devops",
+    "to": "entities/DeclarativeDevOpsMicroframeworks",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/functional-programming-in-powershell-original-markdown-version",
+    "to": "concepts/FunctionalProgramming",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/script-to-query-active-directory",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/script-to-query-active-directory",
+    "to": "entities/ActiveDirectory",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/script-to-query-active-directory",
+    "to": "concepts/ADAdministration",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/active-directory-scripts-galore-come-and-get-it",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/active-directory-scripts-galore-come-and-get-it",
+    "to": "entities/ActiveDirectory",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/active-directory-scripts-galore-come-and-get-it",
+    "to": "concepts/ADAdministration",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/07-declarative-idempotency",
+    "to": "concepts/DesiredStateConfiguration",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/07-declarative-idempotency",
+    "to": "entities/Requirements",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/07-declarative-idempotency",
+    "to": "concepts/DeclarativeDevOps",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/07-declarative-idempotency",
+    "to": "concepts/Idempotency",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/07-declarative-idempotency",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/07-declarative-idempotency",
+    "to": "entities/ChristopherKuech",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/07-declarative-idempotency",
+    "to": "entities/DeclarativeDevOpsMicroframeworks",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/invocation-operators-states-and-scopes",
+    "to": "concepts/SessionState",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/invocation-operators-states-and-scopes",
+    "to": "concepts/InvocationOperators",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/invocation-operators-states-and-scopes",
+    "to": "entities/PatrickMeinecke",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/invocation-operators-states-and-scopes",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/invocation-operators-states-and-scopes",
+    "to": "concepts/ScriptBlocks",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/powershell-classes-and-concepts",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/powershell-classes-and-concepts",
+    "to": "concepts/ObjectOrientedPowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/powershell-classes-and-concepts",
+    "to": "entities/PowerShellClasses",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/how-to-create-a-group-managed-service-accounts-gmsa",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/how-to-create-a-group-managed-service-accounts-gmsa",
+    "to": "entities/ActiveDirectory",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/how-to-create-a-group-managed-service-accounts-gmsa",
+    "to": "concepts/ADAdministration",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/how-to-write-better-powershell-scripts-architecture-and-best-practices",
+    "to": "entities/EmanueleBartolesi",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/how-to-write-better-powershell-scripts-architecture-and-best-practices",
+    "to": "concepts/ScriptArchitecture",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/how-to-write-better-powershell-scripts-architecture-and-best-practices",
+    "to": "concepts/PowerShellTesting",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/how-to-write-better-powershell-scripts-architecture-and-best-practices",
+    "to": "concepts/PowerShellModules",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/how-to-write-better-powershell-scripts-architecture-and-best-practices",
+    "to": "concepts/PowerShellFormatting",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/how-to-write-better-powershell-scripts-architecture-and-best-practices",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/powershell-v5-classes-and-concepts-html",
+    "to": "entities/PowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/powershell-v5-classes-and-concepts-html",
+    "to": "concepts/ObjectOrientedPowerShell",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "sources/powershell-v5-classes-and-concepts-html",
+    "to": "entities/PowerShellClasses",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  },
+  {
+    "from": "entities/ChristopherKuech",
+    "to": "entities/DeclarativeDevOpsMicroframeworks",
+    "type": "EXTRACTED",
+    "color": "#555555",
+    "confidence": 1.0
+  }
+]);
+
+const container = document.getElementById("graph");
+const network = new vis.Network(container, { nodes, edges }, {
+  nodes: {
+    shape: "dot",
+    size: 12,
+    font: { color: "#eee", size: 13 },
+    borderWidth: 2,
+  },
+  edges: {
+    width: 1.2,
+    smooth: { type: "continuous" },
+    arrows: { to: { enabled: true, scaleFactor: 0.5 } },
+  },
+  physics: {
+    stabilization: { iterations: 150 },
+    barnesHut: { gravitationalConstant: -8000, springLength: 120 },
+  },
+  interaction: { hover: true, tooltipDelay: 200 },
+});
+
+network.on("click", params => {
+  if (params.nodes.length > 0) {
+    const node = nodes.get(params.nodes[0]);
+    document.getElementById("info").style.display = "block";
+    document.getElementById("info-title").textContent = node.label;
+    document.getElementById("info-type").textContent = node.type;
+    document.getElementById("info-path").textContent = node.path;
+  } else {
+    document.getElementById("info").style.display = "none";
+  }
+});
+
+document.getElementById("stats").textContent =
+  `${nodes.length} nodes · ${edges.length} edges`;
+
+function searchNodes(q) {
+  const lower = q.toLowerCase();
+  nodes.forEach(n => {
+    nodes.update({ id: n.id, opacity: (!q || n.label.toLowerCase().includes(lower)) ? 1 : 0.15 });
+  });
+}
+</script>
+</body>
+</html>

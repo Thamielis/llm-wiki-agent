@@ -6,6 +6,51 @@ This file is maintained by the LLM. Updated on every ingest.
 - [Overview](overview.md) — living synthesis across all sources
 
 ## Sources
+- [Loop each user](sources/adsi-searching-for-an-user-object-in-active-directory-powershellbros-com.md) — Active Directory operations, reporting, and automation patterns
+- [Active Directory Scripts Galore: Come and Get It!](sources/active-directory-scripts-galore-come-and-get-it.md) — Active Directory operations, reporting, and automation patterns
+- [Inhaltsverzeichnis für PowerShell\00-ToInclude\PS\ActiveDirectory](sources/activedirectory-toc.md) — Active Directory operations, reporting, and automation patterns
+- [Add users to local group remotely](sources/add-users-to-local-group-remotely-using-powershell-powershellbros-com.md) — Active Directory operations, reporting, and automation patterns
+- [Basic DC health email report via PowerShell - Powershellbros.com](sources/basic-dc-health-email-report-via-powershell-powershellbros-com.md) — Active Directory operations, reporting, and automation patterns
+- [How script works?](sources/find-duplicated-spns-in-active-directory-powershellbros-com.md) — Active Directory operations, reporting, and automation patterns
+- [Get AD System](sources/get-ad-system-info-remotely-using-powershell-function-powershellbros-com.md) — Active Directory operations, reporting, and automation patterns
+- [Domain role and PC type](sources/get-domain-role-and-pc-type-from-remote-computers-powershellbros-com.md) — Active Directory operations, reporting, and automation patterns
+- [Currently locked users](sources/get-lockout-source-for-currently-locked-users-powershellbros-com.md) — Active Directory operations, reporting, and automation patterns
+- [How to Manage Active Directory Sites with PowerShell](sources/how-to-manage-active-directory-sites-with-powershell.md) — Active Directory operations, reporting, and automation patterns
+- [How to copy groups membership from reference account - Powershellbros.com](sources/how-to-copy-groups-membership-from-reference-account-powershellbros-com.md) — Active Directory operations, reporting, and automation patterns
+- [**Basic concepts** [#][1]](sources/how-to-create-a-group-managed-service-accounts-gmsa.md) — Active Directory operations, reporting, and automation patterns
+- [Importing/Exporting Photos to/from Active Directory](sources/importing-exporting-photos-ad.md) — Active Directory operations, reporting, and automation patterns
+- [PowerShell Server Inventory, Part 3: Viewing the Inventory using a UI](sources/powershell-server-inventory-part-3-viewing-the-inventory-using-a-ui.md) — Active Directory operations, reporting, and automation patterns
+- [PowerShell one-liner Find AD user based on property - Powershellbros.com](sources/powershell-one-liner-find-ad-user-based-on-property-powershellbros-com.md) — Active Directory operations, reporting, and automation patterns
+- [PowerShell one-liner Get AD user groups - Powershellbros.com](sources/powershell-one-liner-get-ad-user-groups-powershellbros-com.md) — Active Directory operations, reporting, and automation patterns
+- [Removing Groups and Users from Local Administrators Group in PowerShell](sources/removing-groups-and-users-from-local-admingrp.md) — Active Directory operations, reporting, and automation patterns
+- [Active Directory » Get-Blog : Ryan's PowerShell Blog](sources/script-to-query-active-directory.md) — Active Directory operations, reporting, and automation patterns
+- [Use Set-ADUser command to update user attributes - Powershellbros.com](sources/use-set-aduser-command-to-update-user-attributes-powershellbros-com.md) — Active Directory operations, reporting, and automation patterns
+- [Using Group Managed Service Accounts (gMSAs) for PowerShell Remoting: A Walk-through - Amir Sayes](sources/using-group-managed-service-accounts-gmsas-for-powershell-remoting-a-walk-through-amir-sayes.md) — Active Directory operations, reporting, and automation patterns
+- [Using Group Managed Service Accounts (gMSAs) for PowerShell Remoting: A Walk-through - Amir Sayes](sources/using-group-managed-service-accounts-gmsas-for-powershell-remoting.md) — Active Directory operations, reporting, and automation patterns
+- [Using PowerShell to Export GPOs to Create a Fancy GPO Report](sources/using-powershell-to-export-gpos-to-create-a-fancy-gpo-report.md) — Active Directory operations, reporting, and automation patterns
+- [Related Posts](sources/using-win32-useraccount-wmi-filter-in-powershellgroup-policies-and-what-to-avoid.md) — Active Directory operations, reporting, and automation patterns
+- [ABOUT_CLASSES](sources/about-classes.md) — object-oriented and class-centric PowerShell guidance
+- [Beyond custom objects: Create a .NET class](sources/beyond-custom-objects-create-a-net-class.md) — object-oriented and class-centric PowerShell guidance
+- [Functional PowerShell with Classes](sources/functional-powershell-with-classes.md) — object-oriented and class-centric PowerShell guidance
+- [Introduction](sources/how-to-write-powershell-modules-with-classes.md) — object-oriented and class-centric PowerShell guidance
+- [Inhaltsverzeichnis für PowerShell\Klassen](sources/klassen-toc.md) — object-oriented and class-centric PowerShell guidance
+- [New to PowerShell? Use Classes | by Christopher Kuech | in ITNEXT - Freedium](sources/new-to-powershell-use-classes.md) — object-oriented and class-centric PowerShell guidance
+- [Playing with Classes in PowerShell v5 Preview](sources/playing-with-classes-in-powershell-v5-preview.md) — object-oriented and class-centric PowerShell guidance
+- [PowerShell Classes - Your Ultimate Guide - Petri IT Knowledgebase](sources/powershell-classes-your-ultimate-guidepowershell-classes-your-ultimate-guide.md) — object-oriented and class-centric PowerShell guidance
+- [PowerShell-Klassen – Ihr ultimativer Leitfaden – Petri IT Knowledgebase](sources/powershell-classes-your-ultimate-guide-de.md) — object-oriented and class-centric PowerShell guidance
+- [PowerShell Design Patterns](sources/powershell-and-design-patterns.md) — object-oriented and class-centric PowerShell guidance
+- [Abstract](sources/powershell-v5-classes-and-concepts.md) — object-oriented and class-centric PowerShell guidance
+- [Abstract](sources/powershell-v5-classes-and-concepts-html.md) — object-oriented and class-centric PowerShell guidance
+- [Software Design Patterns in PowerShell](sources/software-design-patterns-in-powershell-strategy-pattern.md) — object-oriented and class-centric PowerShell guidance
+- [Save as myClassType.psm1](sources/testing-powershell-classes.md) — object-oriented and class-centric PowerShell guidance
+- [Unlocking PowerShell Classes: An In-Depth Overview and Guide for Beginners](sources/unlocking-powershell-classes-an-in-depth-overview-and-guide-for-beginners.md) — object-oriented and class-centric PowerShell guidance
+- [Introduction](sources/bulding-powershell-command-inventory-solution.md) — object-oriented and class-centric PowerShell guidance
+- [A PowerShell Conversion Challenge](sources/creating-class-definition-from-object-part-1.md) — object-oriented and class-centric PowerShell guidance
+- [A PowerShell Conversion Challenge](sources/creating-class-definition-from-object-part-2.md) — object-oriented and class-centric PowerShell guidance
+- [A PowerShell Conversion Challenge](sources/creating-class-definition-from-object-part-3.md) — object-oriented and class-centric PowerShell guidance
+- [[Ultimate Guide]](sources/index.md) — object-oriented and class-centric PowerShell guidance
+- [Introduction](sources/powershell-classes-and-concepts.md) — object-oriented and class-centric PowerShell guidance
+- [Introduction](sources/powershell-command-inventory-part-deux.md) — object-oriented and class-centric PowerShell guidance
 - [Development Index](sources/development-index.md) — table of contents for the PowerShell development corpus and its documenting/tooling subsections
 - [Functional Programming in PowerShell](sources/01-functional-programming-in-powershell.md) — pragmatic functional patterns in PowerShell through scriptblocks, pipelines, and side-effect minimization
 - [Declarative DevOps](sources/02-declarative-devops.md) — desired-state DevOps as a cleaner and more idempotent alternative to imperative automation
@@ -34,6 +79,8 @@ This file is maintained by the LLM. Updated on every ingest.
 - [Automate Jira and GitHub with Codex](sources/automate-jira-and-github-with-codex.md) — cookbook workflow for label-triggered Jira-to-PR automation through GitHub Actions and Codex
 
 ## Entities
+- [Active Directory](entities/ActiveDirectory.md) — Windows directory service domain for account, policy, and infrastructure automation
+- [PowerShell Classes](entities/PowerShellClasses.md) — class-based PowerShell design and implementation techniques
 - [Christopher Kuech](entities/ChristopherKuech.md) — author of the series-heavy PowerShell architecture corpus
 - [PowerShell](entities/PowerShell.md) — host language for the wiki's automation, internals, documentation, and delivery-engineering patterns
 - [Declarative DevOps Microframeworks](entities/DeclarativeDevOpsMicroframeworks.md) — the umbrella series tying many current sources together
@@ -53,6 +100,8 @@ This file is maintained by the LLM. Updated on every ingest.
 - [Codex](entities/Codex.md) — coding agent embedded in the cookbook ticket-to-PR loop
 
 ## Concepts
+- [Object-Oriented PowerShell](concepts/ObjectOrientedPowerShell.md) — using classes, inheritance, and encapsulation in PowerShell automation
+- [AD Administration](concepts/ADAdministration.md) — PowerShell-driven Active Directory user, group, policy, and service-account management
 - [Functional Programming](concepts/FunctionalProgramming.md) — data-first, transformation-oriented PowerShell design
 - [Higher-Order Functions](concepts/HigherOrderFunctions.md) — pipeline transforms that take behavior as input
 - [ScriptBlocks](concepts/ScriptBlocks.md) — PowerShell first-class functions and closures
