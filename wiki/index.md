@@ -6,6 +6,13 @@ This file is maintained by the LLM. Updated on every ingest.
 - [Overview](overview.md) — living synthesis across all sources
 
 ## Sources
+- [Inhaltsverzeichnis für PowerShell\00-ToInclude\PS\SCCM](sources/sccm-toc.md) — section index marker for the SCCM automation corpus
+- [Inhaltsverzeichnis für PowerShell\00-ToInclude\PS\PSAppDeployToolkit](sources/psappdeploytoolkit-toc.md) — subsection marker for deployment-toolkit content
+- [Get pending updates in Software Center on remote machines - Powershellbros.com](sources/get-pending-updates-in-software-center-on-remote-machines-powershellbros-com.md) — remote SCCM update-state reporting via `CCM_SoftwareUpdate`
+- [PowerShell scripting template for SCCM packages](sources/powershell-scripting-template-for-sccm-packages.md) — reusable phased deployment-wrapper template for SCCM/MDT packages
+- [How to gather SCCM device collections - Powershellbros.com](sources/how-to-gather-sccm-device-collections-powershellbros-com.md) — per-device collection-membership reporting workflow
+- [Get list of unhealthy SCOM agents (grey state) using PowerShell - Powershellbros.com](sources/get-list-of-unhealthy-scom-agents-grey-state-using-powershell-powershellbros-com.md) — unhealthy-agent triage export via OperationsManager cmdlets
+- [Run SCCM client actions on remote machines using PowerShell script - Powershellbros.com](sources/run-sccm-client-actions-on-remote-machines-using-powershell-script-powershellbros-com.md) — schedule-ID mapped remote SCCM client action orchestration
 - [Creating Runspaces - PowerShell](sources/creating-runspaces-powershell.md) — defines runspaces and custom `InitialSessionState` setup for host applications
 - [Adding and invoking commands - PowerShell](sources/adding-and-invoking-commands-powershell.md) — .NET hosting API patterns for synchronous/asynchronous pipeline execution
 - [Producer Consumer Parallelism in PowerShell](sources/producer-consumer-parallelism-in-powershell.md) — queue-based runspace parallelism pattern with practical performance gains
@@ -135,6 +142,9 @@ This file is maintained by the LLM. Updated on every ingest.
 - [Graph theory with PowerShell – Tech thoughts](sources/graph-theory-with-powershell.md) — ingested in batch continuation from `Graphs`
 - [A Quick Guide to Building PowerShell Async Functions](sources/a-quick-guide-to-building-powershell-async-functions.md) — ingested in batch continuation from `HowTos`
 ## Entities
+- [Dennis Span](entities/DennisSpan.md) — author of SCCM/MDT deployment scripting template patterns
+- [SCOM](entities/SCOM.md) — monitoring platform used for unhealthy-agent discovery and triage exports
+- [SCCM](entities/SCCM.md) — endpoint-management platform for client actions, update workflows, and collection reporting
 - [Lee Holmes](entities/LeeHolmes.md) — author documenting producer-consumer runspace parallelism patterns in PowerShell
 - [Pester](entities/Pester.md) — PowerShell testing framework spanning baseline checks to v5 CI-ready module tests
 - [Active Directory](entities/ActiveDirectory.md) — Windows directory service domain for account, policy, and infrastructure automation
@@ -158,6 +168,8 @@ This file is maintained by the LLM. Updated on every ingest.
 - [Codex](entities/Codex.md) — coding agent embedded in the cookbook ticket-to-PR loop
 
 ## Concepts
+- [Monitoring Automation](concepts/MonitoringAutomation.md) — scripted monitoring triage and reporting workflows (SCOM-focused)
+- [SCCM Automation](concepts/SCCMAutomation.md) — ConfigMgr-oriented scripting for updates, actions, collections, and package deployments
 - [Parallel Processing](concepts/ParallelProcessing.md) — asynchronous pipelines and producer-consumer runspace workers for throughput
 - [Runspaces](concepts/Runspaces.md) — execution environments that bound command surface and state in hosted PowerShell
 - [Object-Oriented PowerShell](concepts/ObjectOrientedPowerShell.md) — using classes, inheritance, and encapsulation in PowerShell automation

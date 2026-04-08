@@ -5,6 +5,14 @@ Append-only chronological record of all operations.
 Format: `## [YYYY-MM-DD] <operation> | <title>`
 
 ## [2026-04-08] lint | Wiki health check
+## [2026-04-08] ingest | Inhaltsverzeichnis für PowerShell\00-ToInclude\PS\SCCM
+## [2026-04-08] ingest | Inhaltsverzeichnis für PowerShell\00-ToInclude\PS\PSAppDeployToolkit
+## [2026-04-08] ingest | Get pending updates in Software Center on remote machines - Powershellbros.com
+## [2026-04-08] ingest | PowerShell scripting template for SCCM packages
+## [2026-04-08] ingest | How to gather SCCM device collections - Powershellbros.com
+## [2026-04-08] ingest | Get list of unhealthy SCOM agents (grey state) using PowerShell - Powershellbros.com
+## [2026-04-08] ingest | Run SCCM client actions on remote machines using PowerShell script - Powershellbros.com
+## [2026-04-08] lint | Wiki health check
 ## [2026-04-08] ingest | Creating Runspaces - PowerShell
 ## [2026-04-08] ingest | Adding and invoking commands - PowerShell
 ## [2026-04-08] ingest | Producer Consumer Parallelism in PowerShell

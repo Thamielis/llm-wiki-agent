@@ -29,3 +29,7 @@ Recent ingest work expanded test coverage knowledge with dedicated Pester source
 
 ## Runspace hosting and concurrency cluster
 New runspace-focused sources add explicit guidance for embedding PowerShell via .NET (`PowerShell` and `InitialSessionState` APIs), constraining command surfaces, and scaling work through producer-consumer queue orchestration. These additions connect architecture concerns with performance-oriented parallel execution patterns.
+
+
+## SCCM and monitoring operations cluster
+This ingest block adds Configuration Manager and Operations Manager operations content: remote SCCM client schedule triggering, Software Center update reporting, device-collection export routines, package deployment templating, and unhealthy-agent monitoring triage. Together these reinforce the wiki's practical enterprise-ops automation coverage.
