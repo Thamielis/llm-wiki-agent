@@ -1,0 +1,178 @@
+*** Begin Patch
+*** Add File: wiki/sources/01-functional-programming-in-powershell.md
++---
++title: "Functional Programming in PowerShell"
++type: source
++tags: [powershell, functional-programming, scripting]
++sources: [01-functional-programming-in-powershell]
++last_updated: 2026-04-08
++date: 2025-05-20
++source_file: raw/PowerShell/01_Development/01_Functional Programming in PowerShell.md
++---
++
++## Summary
++Christopher Kuech argues that PowerShell is not purely functional but naturally supports a practical functional style through scriptblocks, pipeline-oriented higher-order functions, recursion, and immutable habits. The article frames functional PowerShell as a way to reduce side effects, improve testability, and keep scripts idempotent without sacrificing idiomatic use of the native pipeline. It also points readers toward the unctional module for non-native helpers like composition and reduce-style operations.
++
++## Key Claims
++- PowerShell supports a strong functional style even though it is not a purely functional language.
++- Functional patterns in PowerShell include pure functions, declarative expressions, recursion, immutability, higher-order functions, data-first design, and monadic error handling.
++- Native pipeline commands such as ForEach-Object, Where-Object, Group-Object, and Sort-Object are the core higher-order tools for idiomatic functional PowerShell.
++- Functional code is valuable in PowerShell because fewer side effects make scripts easier to test, debug, and rerun safely.
++- Performance concerns around functional style are usually secondary in PowerShell because network and system operations dominate runtime, and native pipeline commands are already optimized for large datasets.
++
++## Key Quotes
++> "PowerShell isn't a purely functional language, but PowerShell very elegantly integrates some functional concepts into its semantics."
++
++> "Side effects are much harder to unit test and debug than pure functions and immutable code"
++
++> "A monad is a method of maintaining state in purely functional code by passing state around as an object."
++
++## Connections
++- [[ChristopherKuech]] — author of the article and related PowerShell essays referenced throughout the piece.
++- [[PowerShell]] — the language being presented as a good host for pragmatic functional patterns.
++- [[DeclarativeDevOpsMicroframeworks]] — the larger article series this piece belongs to.
++- [[FunctionalProgramming]] — the main programming model the article translates into PowerShell terms.
++- [[HigherOrderFunctions]] — central mechanism for data transformation in the article's pipeline examples.
++- [[ScriptBlocks]] — PowerShell's first-class function construct and the basis for closures and higher-order behavior.
++- [[Immutability]] — presented as a way to reduce shared state and simplify debugging.
++- [[Monads]] — introduced as a functional alternative to imperative error-handling flow.
++
++## Contradictions
++- No direct contradictions with current wiki content.
+*** Add File: wiki/entities/ChristopherKuech.md
++---
++title: "Christopher Kuech"
++type: entity
++tags: [person, author, powershell]
++sources: [01-functional-programming-in-powershell]
++last_updated: 2026-04-08
++---
++
++Christopher Kuech is the cited author of [[Functional Programming in PowerShell]] and the broader [[DeclarativeDevOpsMicroframeworks]] series. In this source, he advocates a pragmatic functional style for [[PowerShell]] that emphasizes purity, higher-order functions, and reduced side effects.
+*** Add File: wiki/entities/PowerShell.md
++---
++title: "PowerShell"
++type: entity
++tags: [language, shell, automation]
++sources: [01-functional-programming-in-powershell]
++last_updated: 2026-04-08
++---
++
++[[PowerShell]] is presented here as a language that is not purely functional but that integrates functional ideas unusually well for scripting and automation work. The source highlights scriptblocks, filters, and pipeline-native commands as the main features that make functional patterns practical in PowerShell.
+*** Add File: wiki/entities/DeclarativeDevOpsMicroframeworks.md
++---
++title: "Declarative DevOps Microframeworks"
++type: entity
++tags: [project, series, devops]
++sources: [01-functional-programming-in-powershell]
++last_updated: 2026-04-08
++---
++
++[[DeclarativeDevOpsMicroframeworks]] is the article series that [[Functional Programming in PowerShell]] belongs to. Within this source it serves as the larger framing for writing less code, keeping PowerShell declarative, and scaling DevOps-oriented scripting patterns.
+*** Add File: wiki/concepts/FunctionalProgramming.md
++---
++title: "Functional Programming"
++type: concept
++tags: [paradigm, programming]
++sources: [01-functional-programming-in-powershell]
++last_updated: 2026-04-08
++---
++
++In this wiki, [[FunctionalProgramming]] refers to organizing logic around functions and expressions instead of imperative statement sequences. The PowerShell article maps the concept to pure functions, declarative style, recursion, immutability, higher-order functions, data-first design, and monadic error handling.
+*** Add File: wiki/concepts/HigherOrderFunctions.md
++---
++title: "Higher-Order Functions"
++type: concept
++tags: [functions, pipelines, transformations]
++sources: [01-functional-programming-in-powershell]
++last_updated: 2026-04-08
++---
++
++[[HigherOrderFunctions]] are functions that take functions as inputs or return functions as outputs. The source treats ForEach-Object, Where-Object, Group-Object, Sort-Object, jobs with callbacks, and reduce-style helpers like Compress-Object as the practical PowerShell forms of this idea.
+*** Add File: wiki/concepts/ScriptBlocks.md
++---
++title: "ScriptBlocks"
++type: concept
++tags: [powershell, functions, closures]
++sources: [01-functional-programming-in-powershell]
++last_updated: 2026-04-08
++---
++
++[[ScriptBlocks]] are PowerShell's first-class functions and the foundation for functional composition in the source article. They can be assigned to variables, passed to higher-order commands, invoked with . or &, and closed over surrounding values when a stable captured context is needed.
+*** Add File: wiki/concepts/Immutability.md
++---
++title: "Immutability"
++type: concept
++tags: [state, debugging, reliability]
++sources: [01-functional-programming-in-powershell]
++last_updated: 2026-04-08
++---
++
++[[Immutability]] is described as avoiding in-place modification and instead cloning data before writes. In the PowerShell context, the article argues that this copy-on-write discipline reduces shared state, makes debugging easier, and pairs naturally with pure functions and idempotent scripts.
+*** Add File: wiki/concepts/Monads.md
++---
++title: "Monads"
++type: concept
++tags: [errors, state, functional-programming]
++sources: [01-functional-programming-in-powershell]
++last_updated: 2026-04-08
++---
++
++[[Monads]] are introduced as a way to encode side effects such as error state in return values instead of imperative control flow. The article specifically points to Nullable[T]-style results as a functional alternative to throwing errors immediately, while noting that PowerShell still sometimes requires conventional 	ry and catch.
+*** Update File: wiki/index.md
+@@
+ # Wiki Index
+ 
+ This file is maintained by the LLM. Updated on every ingest.
+ 
+ ## Overview
+ - [Overview](overview.md) — living synthesis across all sources
+ 
+ ## Sources
++- [Functional Programming in PowerShell](sources/01-functional-programming-in-powershell.md) — pragmatic functional patterns in PowerShell through scriptblocks, pipelines, and side-effect minimization
+ 
+ ## Entities
++- [Christopher Kuech](entities/ChristopherKuech.md) — author advocating functional PowerShell patterns
++- [PowerShell](entities/PowerShell.md) — scripting language framed as a strong host for practical functional style
++- [Declarative DevOps Microframeworks](entities/DeclarativeDevOpsMicroframeworks.md) — article series focused on scalable declarative PowerShell practices
+ 
+ ## Concepts
++- [Functional Programming](concepts/FunctionalProgramming.md) — organizing PowerShell around expressions, purity, and transformations
++- [Higher-Order Functions](concepts/HigherOrderFunctions.md) — pipeline-oriented transformations like map, filter, sort, and grouping
++- [ScriptBlocks](concepts/ScriptBlocks.md) — PowerShell's first-class function mechanism
++- [Immutability](concepts/Immutability.md) — copy-on-write discipline for reducing shared state
++- [Monads](concepts/Monads.md) — return-value encoding of error state in functional flow
+ 
+ ## Syntheses
+*** Update File: wiki/overview.md
+@@
+ ---
+ title: "Overview"
+ type: synthesis
+-tags: []
+-sources: []
+-last_updated: ""
++tags: [powershell, functional-programming]
++sources: [01-functional-programming-in-powershell]
++last_updated: 2026-04-08
+ ---
+ 
+ # Overview
+ 
+ *This page is maintained by the LLM. It is updated on every ingest to reflect the current synthesis across all sources.*
+ 
+-No sources ingested yet. Add your first source with:
+-
+-`ash
+-python tools/ingest.py raw/your-source.md
+-`
++The current wiki centers on a pragmatic view of [[FunctionalProgramming]] in [[PowerShell]]. The first ingested source argues that PowerShell's native model already supports many functional techniques through [[ScriptBlocks]], pipeline-based [[HigherOrderFunctions]], recursion, and disciplined [[Immutability]].
++
++The main value proposition in the current material is operational rather than academic purity: fewer side effects, easier unit testing, and more idempotent scripts. Native commands such as ForEach-Object, Where-Object, Group-Object, and Sort-Object are treated as the idiomatic building blocks for functional data transformation, while custom helpers from external modules fill gaps like composition and reduce-style folding.
++
++The current source also positions functional error handling as a gradient rather than a strict replacement for imperative control flow. [[Monads]] are presented as a useful pattern for representing failure in return values, but the source explicitly notes that conventional PowerShell error handling still remains necessary in some cases.
+*** Update File: wiki/log.md
+@@
+ ---
++## [2026-04-08] ingest | Functional Programming in PowerShell
+*** End Patch
