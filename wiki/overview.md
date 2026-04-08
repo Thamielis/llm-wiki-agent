@@ -1,17 +1,17 @@
 ---
 title: "Overview"
-type: synthesis
-tags: [powershell, functional-programming]
-sources: [01-functional-programming-in-powershell]
-last_updated: 2026-04-08
+type: "synthesis"
+tags: [powershell, devops, architecture]
+sources: [01-functional-programming-in-powershell, 02-declarative-devops, 03-devops-microframeworks, 04-private-powershell-modules, 05-writing-maintainable-powershell, 06-declarative-config-management, 07-declarative-idempotency, 08-automating-work-item-management]
+last_updated: "2026-04-08"
 ---
 
 # Overview
 
 *This page is maintained by the LLM. It is updated on every ingest to reflect the current synthesis across all sources.*
 
-The current wiki centers on a pragmatic view of [[FunctionalProgramming]] in [[PowerShell]]. The first ingested source argues that PowerShell's native model already supports many functional techniques through [[ScriptBlocks]], pipeline-based [[HigherOrderFunctions]], recursion, and disciplined [[Immutability]].
+The current wiki is now centered on Christopher Kuech's eight-part [[DeclarativeDevOpsMicroframeworks]] series. Across these sources, the recurring thesis is that PowerShell codebases scale better when teams stop writing ad hoc imperative glue and instead formalize their work around [[FunctionalProgramming]], [[DeclarativeProgramming]], small reusable [[DevOpsMicroframeworks]], and explicit interfaces through [[PowerShellModules]].
 
-The main value proposition in the current material is operational rather than academic purity: fewer side effects, easier unit testing, and more idempotent scripts. Native commands such as `ForEach-Object`, `Where-Object`, `Group-Object`, and `Sort-Object` are treated as the idiomatic building blocks for functional data transformation, while custom helpers from external modules fill gaps like composition and reduce-style folding.
+Three themes dominate the material. First, design should minimize mutable state and side effects so that code becomes easier to test, rerun, and debug; this spans [[FunctionalProgramming]], [[Idempotency]], and the desired-state framing of [[DeclarativeDevOps]]. Second, operational problems should be modeled explicitly before they are implemented: configuration becomes a matter of selecting and merging partial configs, idempotent setup becomes a graph of requirements, and work-item tracking becomes a transformation from repo files to structured TODO objects. Third, maintainability comes from boundaries: MVC-style separation for large PowerShell codebases, modules as packaging units, and microframeworks as the right size for custom DevOps reuse.
 
-The current source also positions functional error handling as a gradient rather than a strict replacement for imperative control flow. [[Monads]] are presented as a useful pattern for representing failure in return values, but the source explicitly notes that conventional PowerShell error handling still remains necessary in some cases.
+The wiki currently contains no contradictions across these sources. Instead, the articles reinforce each other as a coherent architecture philosophy: PowerShell should be treated not just as a scripting shell, but as a language for building narrowly scoped, declarative, testable automation systems.

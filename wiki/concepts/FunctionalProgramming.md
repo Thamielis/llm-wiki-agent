@@ -1,9 +1,9 @@
 ---
 title: "Functional Programming"
-type: concept
+type: "concept"
 tags: [paradigm, programming]
-sources: [01-functional-programming-in-powershell]
-last_updated: 2026-04-08
+sources: [01-functional-programming-in-powershell, 05-writing-maintainable-powershell, 08-automating-work-item-management]
+last_updated: "2026-04-08"
 ---
 
-In this wiki, [[FunctionalProgramming]] refers to organizing logic around functions and expressions instead of imperative statement sequences. The PowerShell article maps the concept to pure functions, declarative style, recursion, immutability, higher-order functions, data-first design, and monadic error handling.
+In this wiki, [[FunctionalProgramming]] means organizing logic around transformations, expressions, and explicit data flow instead of imperative step mutation. The current sources emphasize pure functions, higher-order pipeline commands, immutability habits, and data-first scripting as the practical PowerShell versions of the concept.

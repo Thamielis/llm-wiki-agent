@@ -1,11 +1,11 @@
 ---
 title: "Functional Programming in PowerShell"
-type: source
+type: "source"
 tags: [powershell, functional-programming, scripting]
 sources: [01-functional-programming-in-powershell]
-last_updated: 2026-04-08
-date: 2025-05-20
-source_file: raw/PowerShell/01_Development/01_Functional Programming in PowerShell.md
+last_updated: "2026-04-08"
+date: "2025-05-20"
+source_file: "raw/PowerShell/01_Development/01_Functional Programming in PowerShell.md"
 ---
 
 ## Summary
@@ -20,9 +20,7 @@ Christopher Kuech argues that PowerShell is not purely functional but naturally 
 
 ## Key Quotes
 > "PowerShell isn't a purely functional language, but PowerShell very elegantly integrates some functional concepts into its semantics."
-
 > "Side effects are much harder to unit test and debug than pure functions and immutable code"
-
 > "A monad is a method of maintaining state in purely functional code by passing state around as an object."
 
 ## Connections
