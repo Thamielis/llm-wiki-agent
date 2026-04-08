@@ -5,6 +5,14 @@ Append-only chronological record of all operations.
 Format: `## [YYYY-MM-DD] <operation> | <title>`
 
 ## [2026-04-08] lint | Wiki health check
+## [2026-04-08] ingest | Windows Troubleshooting
+## [2026-04-08] ingest | The Top 10 PowerShell Commands Every Sysadmin Should Know
+## [2026-04-08] ingest | 10 PowerShell commands every sysadmin should know
+## [2026-04-08] ingest | Diagnosing common Windows problems with PowerShell troubleshooting packs
+## [2026-04-08] ingest | Windows Triaging with Powershell - Part 1 - Parsing Event Logs
+## [2026-04-08] ingest | Windows Triaging with Powershell - Part 2 - Artifacts Collection
+## [2026-04-08] ingest | How to Connect to Remote Computer PowerShell Detailed Guides
+## [2026-04-08] lint | Wiki health check
 ## [2026-04-08] ingest | Use PowerShell function to get reboot details remotely - Powershellbros.com
 ## [2026-04-08] ingest | Kill process remotely using PowerShell function - Powershellbros.com
 ## [2026-04-08] ingest | Uninstall applications on multiple machines - Powershellbros.com

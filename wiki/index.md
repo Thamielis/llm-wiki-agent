@@ -6,6 +6,13 @@ This file is maintained by the LLM. Updated on every ingest.
 - [Overview](overview.md) — living synthesis across all sources
 
 ## Sources
+- [Windows Troubleshooting](sources/windows-troubleshooting-index.md) — section index connecting triage and troubleshooting-pack workflows
+- [The Top 10 PowerShell Commands Every Sysadmin Should Know](sources/top-powershell-commands.md) — concise baseline cmdlet checklist for operators
+- [10 PowerShell commands every sysadmin should know](sources/10-powershell-commands-for-sysadmins.md) — expanded practical walkthrough of foundational cmdlets
+- [Diagnosing common Windows problems with PowerShell troubleshooting packs](sources/diagnosing-common-windows-problems-with-powershell-troubleshooting-packs.md) — built-in troubleshooting-pack usage for root-cause diagnosis
+- [Windows Triaging with Powershell - Part 1 - Parsing Event Logs](sources/windows-triaging-with-powershell-part-1-parsing-event-logs.md) — event-log-centric triage workflow and report scripting
+- [Windows Triaging with Powershell - Part 2 - Artifacts Collection](sources/windows-triaging-with-powershell-part-2-artifacts-collection.md) — broad forensic/IR artifact collection procedures
+- [How to Connect to Remote Computer PowerShell Detailed Guides](sources/how-to-connect-to-remote-computer-powershell-detailed-guides.md) — PSRemoting and Invoke-Command remote access patterns
 - [Use PowerShell function to get reboot details remotely - Powershellbros.com](sources/use-powershell-function-to-get-reboot-details-remotely-powershellbros-com.md) — remote uptime + Event ID 1074 reboot audit reporting
 - [Kill process remotely using PowerShell function - Powershellbros.com](sources/kill-process-remotely-using-powershell-function-powershellbros-com.md) — interactive remote process termination workflow with confirmation gating
 - [Uninstall applications on multiple machines - Powershellbros.com](sources/uninstall-applications-on-multiple-machines-powershellbros-com.md) — CSV-driven remote uninstall workflow with categorized outcomes
@@ -177,6 +184,7 @@ This file is maintained by the LLM. Updated on every ingest.
 - [Codex](entities/Codex.md) — coding agent embedded in the cookbook ticket-to-PR loop
 
 ## Concepts
+- [Windows Troubleshooting](concepts/WindowsTroubleshooting.md) — troubleshooting packs, triage artifact collection, and remediation workflows
 - [Remote Operations](concepts/RemoteOperations.md) — remote reboot, process control, and software uninstallation administration patterns
 - [Network Diagnostics](concepts/NetworkDiagnostics.md) — scripted connectivity, traceroute, and multi-port validation patterns
 - [Monitoring Automation](concepts/MonitoringAutomation.md) — scripted monitoring triage and reporting workflows (SCOM-focused)

@@ -41,3 +41,7 @@ This block expands operational troubleshooting content with host reachability ch
 
 ## Remote operations cluster
 New remote-administration sources add pragmatic incident-response workflows for reboot diagnostics, emergency reboot execution, interactive remote process termination, and batch software removal across hosts.
+
+
+## Windows troubleshooting cluster
+Recent ingest work added troubleshooting-pack operations, event-log parsing practices, full-spectrum artifact triage collection, and baseline sysadmin command guidance, strengthening the wiki's incident-response and diagnostics depth.
