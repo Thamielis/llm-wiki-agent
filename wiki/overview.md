@@ -37,3 +37,7 @@ This ingest block adds Configuration Manager and Operations Manager operations c
 
 ## Network diagnostics cluster
 This block expands operational troubleshooting content with host reachability checks, one-liner connectivity tests, traceroute/netstat artifact collection, multi-port remoting diagnostics, and local Wi-Fi profile interrogation workflows.
+
+
+## Remote operations cluster
+New remote-administration sources add pragmatic incident-response workflows for reboot diagnostics, emergency reboot execution, interactive remote process termination, and batch software removal across hosts.

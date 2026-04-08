@@ -6,6 +6,10 @@ This file is maintained by the LLM. Updated on every ingest.
 - [Overview](overview.md) — living synthesis across all sources
 
 ## Sources
+- [Use PowerShell function to get reboot details remotely - Powershellbros.com](sources/use-powershell-function-to-get-reboot-details-remotely-powershellbros-com.md) — remote uptime + Event ID 1074 reboot audit reporting
+- [Kill process remotely using PowerShell function - Powershellbros.com](sources/kill-process-remotely-using-powershell-function-powershellbros-com.md) — interactive remote process termination workflow with confirmation gating
+- [Uninstall applications on multiple machines - Powershellbros.com](sources/uninstall-applications-on-multiple-machines-powershellbros-com.md) — CSV-driven remote uninstall workflow with categorized outcomes
+- [How to reboot the server remotely via PowerShell](sources/how-to-reboot-the-server-remotely-via-powershell.md) — shutdown/restart/PSSession fallback reboot playbook
 - [Use PowerShell function to check if servers are accessible - Powershellbros.com](sources/use-powershell-function-to-check-if-servers-are-accessible-powershellbros-com.md) — SMB-share reachability function for quick server-up/down checks
 - [Get netstat and traceroute results from remote servers - Powershellbros.com](sources/get-netstat-and-traceroute-results-from-remote-servers-powershellbros-com.md) — remote netstat/traceroute collection with per-host artifact output
 - [How to check password for WiFi networks - Powershellbros.com](sources/how-to-check-password-for-wifi-networks-powershellbros-com.md) — parses cached WLAN profiles and key data via `netsh`
@@ -173,6 +177,7 @@ This file is maintained by the LLM. Updated on every ingest.
 - [Codex](entities/Codex.md) — coding agent embedded in the cookbook ticket-to-PR loop
 
 ## Concepts
+- [Remote Operations](concepts/RemoteOperations.md) — remote reboot, process control, and software uninstallation administration patterns
 - [Network Diagnostics](concepts/NetworkDiagnostics.md) — scripted connectivity, traceroute, and multi-port validation patterns
 - [Monitoring Automation](concepts/MonitoringAutomation.md) — scripted monitoring triage and reporting workflows (SCOM-focused)
 - [SCCM Automation](concepts/SCCMAutomation.md) — ConfigMgr-oriented scripting for updates, actions, collections, and package deployments

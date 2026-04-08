@@ -1,6 +1,6 @@
 # Wiki Lint Report — 2026-04-08
 
-Scanned 201 wiki pages.
+Scanned 206 wiki pages.
 
 ## Structural Issues
 
@@ -8,7 +8,7 @@ Scanned 201 wiki pages.
 - Deterministic lint pass found **0** broken wikilinks in this revision.
 
 ### Orphan Pages
-- Deterministic lint pass found **140** orphan pages (expected while backlog ingestion and backlinking is in progress).
+- Deterministic lint pass found **144** orphan pages (expected while backlog ingestion and backlinking is in progress).
 
 ## Contradictions
 - No direct contradictions identified in this incremental pass.

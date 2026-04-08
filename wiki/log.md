@@ -5,6 +5,11 @@ Append-only chronological record of all operations.
 Format: `## [YYYY-MM-DD] <operation> | <title>`
 
 ## [2026-04-08] lint | Wiki health check
+## [2026-04-08] ingest | Use PowerShell function to get reboot details remotely - Powershellbros.com
+## [2026-04-08] ingest | Kill process remotely using PowerShell function - Powershellbros.com
+## [2026-04-08] ingest | Uninstall applications on multiple machines - Powershellbros.com
+## [2026-04-08] ingest | How to reboot the server remotely via PowerShell
+## [2026-04-08] lint | Wiki health check
 ## [2026-04-08] ingest | Use PowerShell function to check if servers are accessible - Powershellbros.com
 ## [2026-04-08] ingest | Get netstat and traceroute results from remote servers - Powershellbros.com
 ## [2026-04-08] ingest | How to check password for WiFi networks - Powershellbros.com
