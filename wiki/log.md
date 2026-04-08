@@ -5,6 +5,12 @@ Append-only chronological record of all operations.
 Format: `## [YYYY-MM-DD] <operation> | <title>`
 
 ## [2026-04-08] lint | Wiki health check
+## [2026-04-08] ingest | Use PowerShell function to check if servers are accessible - Powershellbros.com
+## [2026-04-08] ingest | Get netstat and traceroute results from remote servers - Powershellbros.com
+## [2026-04-08] ingest | How to check password for WiFi networks - Powershellbros.com
+## [2026-04-08] ingest | PowerShell one-liner Test connectivity - Powershellbros.com
+## [2026-04-08] ingest | Test multiple ports on remote servers using PowerShell script - Powershellbros.com
+## [2026-04-08] lint | Wiki health check
 ## [2026-04-08] ingest | Inhaltsverzeichnis für PowerShell\00-ToInclude\PS\SCCM
 ## [2026-04-08] ingest | Inhaltsverzeichnis für PowerShell\00-ToInclude\PS\PSAppDeployToolkit
 ## [2026-04-08] ingest | Get pending updates in Software Center on remote machines - Powershellbros.com

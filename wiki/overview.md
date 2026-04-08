@@ -33,3 +33,7 @@ New runspace-focused sources add explicit guidance for embedding PowerShell via 
 
 ## SCCM and monitoring operations cluster
 This ingest block adds Configuration Manager and Operations Manager operations content: remote SCCM client schedule triggering, Software Center update reporting, device-collection export routines, package deployment templating, and unhealthy-agent monitoring triage. Together these reinforce the wiki's practical enterprise-ops automation coverage.
+
+
+## Network diagnostics cluster
+This block expands operational troubleshooting content with host reachability checks, one-liner connectivity tests, traceroute/netstat artifact collection, multi-port remoting diagnostics, and local Wi-Fi profile interrogation workflows.

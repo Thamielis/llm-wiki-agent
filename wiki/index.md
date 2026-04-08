@@ -6,6 +6,11 @@ This file is maintained by the LLM. Updated on every ingest.
 - [Overview](overview.md) — living synthesis across all sources
 
 ## Sources
+- [Use PowerShell function to check if servers are accessible - Powershellbros.com](sources/use-powershell-function-to-check-if-servers-are-accessible-powershellbros-com.md) — SMB-share reachability function for quick server-up/down checks
+- [Get netstat and traceroute results from remote servers - Powershellbros.com](sources/get-netstat-and-traceroute-results-from-remote-servers-powershellbros-com.md) — remote netstat/traceroute collection with per-host artifact output
+- [How to check password for WiFi networks - Powershellbros.com](sources/how-to-check-password-for-wifi-networks-powershellbros-com.md) — parses cached WLAN profiles and key data via `netsh`
+- [PowerShell one-liner Test connectivity - Powershellbros.com](sources/powershell-one-liner-test-connectivity-powershellbros-com.md) — compact Test-Connection/Test-NetConnection connectivity patterns
+- [Test multiple ports on remote servers using PowerShell script - Powershellbros.com](sources/test-multiple-ports-on-remote-servers-using-powershell-script-powershellbros-com.md) — multi-port remoting checks for AD/infra service paths
 - [Inhaltsverzeichnis für PowerShell\00-ToInclude\PS\SCCM](sources/sccm-toc.md) — section index marker for the SCCM automation corpus
 - [Inhaltsverzeichnis für PowerShell\00-ToInclude\PS\PSAppDeployToolkit](sources/psappdeploytoolkit-toc.md) — subsection marker for deployment-toolkit content
 - [Get pending updates in Software Center on remote machines - Powershellbros.com](sources/get-pending-updates-in-software-center-on-remote-machines-powershellbros-com.md) — remote SCCM update-state reporting via `CCM_SoftwareUpdate`
@@ -168,6 +173,7 @@ This file is maintained by the LLM. Updated on every ingest.
 - [Codex](entities/Codex.md) — coding agent embedded in the cookbook ticket-to-PR loop
 
 ## Concepts
+- [Network Diagnostics](concepts/NetworkDiagnostics.md) — scripted connectivity, traceroute, and multi-port validation patterns
 - [Monitoring Automation](concepts/MonitoringAutomation.md) — scripted monitoring triage and reporting workflows (SCOM-focused)
 - [SCCM Automation](concepts/SCCMAutomation.md) — ConfigMgr-oriented scripting for updates, actions, collections, and package deployments
 - [Parallel Processing](concepts/ParallelProcessing.md) — asynchronous pipelines and producer-consumer runspace workers for throughput
