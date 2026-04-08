@@ -18,3 +18,6 @@ The corpus still contains duplicate captures of the same functional-programming 
 
 
 A fifth and sixth cluster now extend the corpus beyond development-only concerns: an Active Directory administration set (health reporting, identity lifecycle scripting, GPO export/reporting, lockout/SPN diagnostics, and gMSA operationalization) plus a class-centric PowerShell design set (class syntax, migration from custom objects, module architecture with classes, testability, and design patterns). Together they push the wiki toward enterprise operations and object-oriented script architecture while remaining consistent with existing emphasis on maintainability and reusable abstractions.
+
+## Recent Batch Updates
+- 2026-04-08: Added 50 additional sources spanning AST parsing, DSC, DNS/EventLog, forensics, and operational HowTos.

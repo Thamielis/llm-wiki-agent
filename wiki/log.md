@@ -1,7 +1,10 @@
+# Wiki Log
+
+Append-only chronological record of all operations.
+
+Format: `## [YYYY-MM-DD] <operation> | <title>`
+
 ## [2026-04-08] graph | Knowledge graph rebuilt
-
-122 nodes, 268 edges (268 extracted, 0 inferred).
-
 ## [2026-04-08] ingest | Loop each user
 ## [2026-04-08] ingest | Active Directory Scripts Galore: Come and Get It!
 ## [2026-04-08] ingest | Inhaltsverzeichnis für PowerShell\00-ToInclude\PS\ActiveDirectory
@@ -22,7 +25,6 @@
 ## [2026-04-08] ingest | Active Directory » Get-Blog : Ryan's PowerShell Blog
 ## [2026-04-08] ingest | Use Set-ADUser command to update user attributes - Powershellbros.com
 ## [2026-04-08] ingest | Using Group Managed Service Accounts (gMSAs) for PowerShell Remoting: A Walk-through - Amir Sayes
-## [2026-04-08] ingest | Using Group Managed Service Accounts (gMSAs) for PowerShell Remoting: A Walk-through - Amir Sayes
 ## [2026-04-08] ingest | Using PowerShell to Export GPOs to Create a Fancy GPO Report
 ## [2026-04-08] ingest | Related Posts
 ## [2026-04-08] ingest | ABOUT_CLASSES
@@ -36,27 +38,11 @@
 ## [2026-04-08] ingest | PowerShell-Klassen – Ihr ultimativer Leitfaden – Petri IT Knowledgebase
 ## [2026-04-08] ingest | PowerShell Design Patterns
 ## [2026-04-08] ingest | Abstract
-## [2026-04-08] ingest | Abstract
 ## [2026-04-08] ingest | Software Design Patterns in PowerShell
 ## [2026-04-08] ingest | Save as myClassType.psm1
 ## [2026-04-08] ingest | Unlocking PowerShell Classes: An In-Depth Overview and Guide for Beginners
-## [2026-04-08] ingest | Introduction
-## [2026-04-08] ingest | A PowerShell Conversion Challenge
-## [2026-04-08] ingest | A PowerShell Conversion Challenge
 ## [2026-04-08] ingest | A PowerShell Conversion Challenge
 ## [2026-04-08] ingest | [Ultimate Guide]
-## [2026-04-08] ingest | Introduction
-## [2026-04-08] ingest | Introduction
-
-# Wiki Log
-
-Append-only chronological record of all operations.
-
-Format: `## [YYYY-MM-DD] <operation> | <title>`
-
-Parse recent entries: `grep "^## \[" wiki/log.md | tail -10`
-
----
 ## [2026-04-08] ingest | Functional Programming in PowerShell
 ## [2026-04-08] ingest | Declarative DevOps
 ## [2026-04-08] ingest | DevOps Microframeworks
@@ -83,3 +69,52 @@ Parse recent entries: `grep "^## \[" wiki/log.md | tail -10`
 ## [2026-04-08] ingest | Unified Approach to Generating Documentation for PowerShell Cmdlets
 ## [2026-04-08] ingest | Using C to Create PowerShell Cmdlets: The Basics
 ## [2026-04-08] ingest | Automate Jira and GitHub with Codex
+## [2026-04-08] ingest | Abstract Syntax Tree - powershell.one
+## [2026-04-08] ingest | Advanced Tokenizing PowerShell Scripts - powershell.one
+## [2026-04-08] ingest | Tokenizing PowerShell Scripts - powershell.one
+## [2026-04-08] ingest | Inhaltsverzeichnis für PowerShell\00-ToInclude\PS\Cmdlet-Help
+## [2026-04-08] ingest | PowerShell Cmdlet finden - 9 Möglichkeiten der Suche
+## [2026-04-08] ingest | `function` `Connect-SQL` `{`
+## [2026-04-08] ingest | Have you ever wonder how to store script credentials securely ? If no, in todays article I want to explain you how to do
+## [2026-04-08] ingest | Test credentials
+## [2026-04-08] ingest | How it works?
+## [2026-04-08] ingest | `$ZoneName` `=` `'zone name'`
+## [2026-04-08] ingest | `$ZoneName` `=` `'Reverse lookup zone name'`
+## [2026-04-08] ingest | `function` `Update-DNSAliasRecord` `{`
+## [2026-04-08] ingest | Converting a Desired State Configuration Script Resource to a Resource Module  Petri IT Knowledgebase(1)
+## [2026-04-08] ingest | Converting a Desired State Configuration Script Resource to a Resource Module  Petri IT Knowledgebase
+## [2026-04-08] ingest | **Class-Based DSC Resource Properties**
+## [2026-04-08] ingest | Separating Code from Environment
+## [2026-04-08] ingest | DSC Configuration Data Layout Tips and Tricks  Petri IT Knowledgebase
+## [2026-04-08] ingest | Desired State Configuration (DSC) is an awesome configuration management tool that is built into Windows on top of Power
+## [2026-04-08] ingest | Deploying Software Using Desired State Configuration  Petri IT Knowledgebase
+## [2026-04-08] ingest | Desired State Configuration (DSC): Grundlagen und Funktionsweise | WindowsPro
+## [2026-04-08] ingest | **Comparing Script Resource vs. Custom Resources**
+## [2026-04-08] ingest | Managing Cross-Node Dependencies with Desired State Configuration  Petri IT Knowledgebase
+## [2026-04-08] ingest | Testing DSC Configurations Using Pester  Petri IT Knowledgebase
+## [2026-04-08] ingest | Inhaltsverzeichnis für PowerShell\00-ToInclude\PS\dsc
+## [2026-04-08] ingest | The PowerShell Stack collection
+## [2026-04-08] ingest | The powershell queue collection - powershelldistrict
+## [2026-04-08] ingest | Dell, WMI, and PowerShell
+## [2026-04-08] ingest | Inhaltsverzeichnis für PowerShell\Ereignisbehandlung
+## [2026-04-08] ingest | Handling Events with PowerShell and .NET (Part 1)
+## [2026-04-08] ingest | Extract IP Address
+## [2026-04-08] ingest | Get-Eventlog
+## [2026-04-08] ingest | I recently had to scan system event log on all production servers to find out which services have been installed. In thi
+## [2026-04-08] ingest | Create a Pivot Table in Excel using PowerShell script - Powershellbros.com
+## [2026-04-08] ingest | Inhaltsverzeichnis für PowerShell\00-ToInclude\PS\Excel
+## [2026-04-08] ingest | PowerShell 7 und Windows
+## [2026-04-08] ingest | Practical PowerShell: Pruning File Trees and Extending Cmdlets - Simple Talk
+## [2026-04-08] ingest | Using PowerShell to Compare / Diff Files
+## [2026-04-08] ingest | Working with File Catalogs in PowerShell 5.1
+## [2026-04-08] ingest | A Poor Man's Profiler with PowerShell and CDB
+## [2026-04-08] ingest | BgShell - Background Shell
+## [2026-04-08] ingest | Extracting Activity History from PowerShell Process Dumps
+## [2026-04-08] ingest | Extracting Forensic Script Content from PowerShell Process Dumps
+## [2026-04-08] ingest | Scour: Fast, Personal, Local Content Searches
+## [2026-04-08] ingest | Scripting WinDbg with PowerShell
+## [2026-04-08] ingest | How to find events about software uninstallation?
+## [2026-04-08] ingest | Inhaltsverzeichnis für PowerShell\Functions
+## [2026-04-08] ingest | Graph theory with PowerShell -part 2 – Tech thoughts
+## [2026-04-08] ingest | Graph theory with PowerShell – Tech thoughts
+## [2026-04-08] ingest | A Quick Guide to Building PowerShell Async Functions
