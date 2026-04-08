@@ -14,13 +14,24 @@ This file is maintained by the LLM. Updated on every ingest.
 - [Declarative Config Management](sources/06-declarative-config-management.md) — cluster-set-based partial configuration merging for large non-homogeneous environments
 - [Declarative Idempotency](sources/07-declarative-idempotency.md) — a requirement-driven engine for synchronous, validated, consistently logged idempotent automation
 - [Automating Work-Item Management](sources/08-automating-work-item-management.md) — turning TODO comments into structured work items with PowerShell regex and pipeline transforms
+- [Declarative DevOps Microframeworks Series Overview](sources/declarative-devops-microframeworks-series-overview.md) — landing page that organizes the series into concepts and applied walkthroughs
+- [Display-Object: a PowerShell utility Cmdlet](sources/display-object-a-powershell-utility-cmdlet.md) — recursive object-path introspection for exploring nested PowerShell values
+- [Formatting Objects without XML](sources/formatting-objects-without-xml.md) — using PowerShell formatting classes and builders instead of handwritten ps1xml
+- [Functional Programming in PowerShell - The Startup Version](sources/functional-programming-in-powershell-the-startup-version.md) — alternate markdown capture of the same functional-programming article with fuller inline examples
+- [Functional Programming in PowerShell - Original Markdown Version](sources/functional-programming-in-powershell-original-markdown-version.md) — another markdown capture of the same functional-programming article, preserved for provenance
+- [How to Write Better PowerShell Scripts: Architecture and Best Practices](sources/how-to-write-better-powershell-scripts-architecture-and-best-practices.md) — general best-practice guidance for script architecture, parameters, output, errors, and testing
+- [Invocation Operators, States and Scopes](sources/invocation-operators-states-and-scopes.md) — deep dive into invocation operators, session state, module scope, and dot-sourcing behavior
+- [Top 20 PowerShell Modul- und Skriptvorlagen](sources/top-20-powershell-modul-und-skriptvorlagen.md) — German roundup of PowerShell module and script templates with pros and cons
 
 ## Entities
-- [Christopher Kuech](entities/ChristopherKuech.md) — author of the ingested PowerShell architecture and automation series
-- [PowerShell](entities/PowerShell.md) — host language for the wiki's current automation and module patterns
-- [Declarative DevOps Microframeworks](entities/DeclarativeDevOpsMicroframeworks.md) — the umbrella series tying the current sources together
+- [Christopher Kuech](entities/ChristopherKuech.md) — author of the series-heavy PowerShell architecture corpus
+- [PowerShell](entities/PowerShell.md) — host language for the wiki's current automation, internals, and formatting patterns
+- [Declarative DevOps Microframeworks](entities/DeclarativeDevOpsMicroframeworks.md) — the umbrella series tying many current sources together
 - [ConfigSets](entities/ConfigSets.md) — module implementing cluster-set-based partial configuration selection
 - [Requirements](entities/Requirements.md) — module implementing requirement-driven declarative idempotency
+- [Phil Factor](entities/PhilFactor.md) — author of the Display-Object utility article
+- [Patrick Meinecke](entities/PatrickMeinecke.md) — author covering formatting internals and session state
+- [Emanuele Bartolesi](entities/EmanueleBartolesi.md) — author of the PowerShell best-practices survey
 
 ## Concepts
 - [Functional Programming](concepts/FunctionalProgramming.md) — data-first, transformation-oriented PowerShell design
@@ -37,5 +48,12 @@ This file is maintained by the LLM. Updated on every ingest.
 - [Idempotency](concepts/Idempotency.md) — reliable reruns that converge to the same result
 - [Desired State Configuration](concepts/DesiredStateConfiguration.md) — PowerShell DSC as built-in desired-state automation
 - [Work-Item Automation](concepts/WorkItemAutomation.md) — turning code annotations into structured tasks
+- [PowerShell Formatting](concepts/PowerShellFormatting.md) — presenting objects through built-in and custom views
+- [Object Introspection](concepts/ObjectIntrospection.md) — exploring object shape and paths programmatically
+- [Invocation Operators](concepts/InvocationOperators.md) — the semantics of `&` and `.` in relation to state
+- [Session State](concepts/SessionState.md) — PowerShell runtime state tree for variables and scopes
+- [Script Architecture](concepts/ScriptArchitecture.md) — file, module, and interface structure for maintainable scripts
+- [PowerShell Testing](concepts/PowerShellTesting.md) — Pester and interface-oriented validation patterns
+- [Module Templates](concepts/ModuleTemplates.md) — starter repositories and scaffolds for new PowerShell projects
 
 ## Syntheses
