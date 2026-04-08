@@ -5,6 +5,11 @@ Append-only chronological record of all operations.
 Format: `## [YYYY-MM-DD] <operation> | <title>`
 
 ## [2026-04-08] lint | Wiki health check
+## [2026-04-08] ingest | Creating Runspaces - PowerShell
+## [2026-04-08] ingest | Adding and invoking commands - PowerShell
+## [2026-04-08] ingest | Producer Consumer Parallelism in PowerShell
+## [2026-04-08] ingest | Windows PowerShell Host Quickstart - PowerShell
+## [2026-04-08] lint | Wiki health check
 ## [2026-04-08] ingest | Pester
 ## [2026-04-08] ingest | Pester framework for Powershell testing - part 1
 ## [2026-04-08] ingest | Erstellen von Pester v5 Tests für die PowerShell-Modulentwicklung

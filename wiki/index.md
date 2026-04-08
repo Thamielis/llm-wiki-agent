@@ -6,6 +6,10 @@ This file is maintained by the LLM. Updated on every ingest.
 - [Overview](overview.md) — living synthesis across all sources
 
 ## Sources
+- [Creating Runspaces - PowerShell](sources/creating-runspaces-powershell.md) — defines runspaces and custom `InitialSessionState` setup for host applications
+- [Adding and invoking commands - PowerShell](sources/adding-and-invoking-commands-powershell.md) — .NET hosting API patterns for synchronous/asynchronous pipeline execution
+- [Producer Consumer Parallelism in PowerShell](sources/producer-consumer-parallelism-in-powershell.md) — queue-based runspace parallelism pattern with practical performance gains
+- [Windows PowerShell Host Quickstart - PowerShell](sources/windows-powershell-host-quickstart-powershell.md) — embedding quickstart for default vs constrained runspaces
 - [Pester](sources/pester-index.md) — table-of-contents source that maps the Pester testing subset
 - [Pester framework for Powershell testing - part 1](sources/pester-framework-for-powershell-testing-part-1.md) — introductory `Describe`/`Context`/`It` usage for workstation health checks
 - [Erstellen von Pester v5 Tests für die PowerShell-Modulentwicklung](sources/pester-v5-tests-fur-powershell.md) — advanced Pester v5 mocks, TestDrive isolation, and CI/coverage workflows
@@ -131,6 +135,7 @@ This file is maintained by the LLM. Updated on every ingest.
 - [Graph theory with PowerShell – Tech thoughts](sources/graph-theory-with-powershell.md) — ingested in batch continuation from `Graphs`
 - [A Quick Guide to Building PowerShell Async Functions](sources/a-quick-guide-to-building-powershell-async-functions.md) — ingested in batch continuation from `HowTos`
 ## Entities
+- [Lee Holmes](entities/LeeHolmes.md) — author documenting producer-consumer runspace parallelism patterns in PowerShell
 - [Pester](entities/Pester.md) — PowerShell testing framework spanning baseline checks to v5 CI-ready module tests
 - [Active Directory](entities/ActiveDirectory.md) — Windows directory service domain for account, policy, and infrastructure automation
 - [PowerShell Classes](entities/PowerShellClasses.md) — class-based PowerShell design and implementation techniques
@@ -153,6 +158,8 @@ This file is maintained by the LLM. Updated on every ingest.
 - [Codex](entities/Codex.md) — coding agent embedded in the cookbook ticket-to-PR loop
 
 ## Concepts
+- [Parallel Processing](concepts/ParallelProcessing.md) — asynchronous pipelines and producer-consumer runspace workers for throughput
+- [Runspaces](concepts/Runspaces.md) — execution environments that bound command surface and state in hosted PowerShell
 - [Object-Oriented PowerShell](concepts/ObjectOrientedPowerShell.md) — using classes, inheritance, and encapsulation in PowerShell automation
 - [AD Administration](concepts/ADAdministration.md) — PowerShell-driven Active Directory user, group, policy, and service-account management
 - [Functional Programming](concepts/FunctionalProgramming.md) — data-first, transformation-oriented PowerShell design

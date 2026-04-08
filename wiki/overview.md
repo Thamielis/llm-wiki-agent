@@ -25,3 +25,7 @@ A fifth and sixth cluster now extend the corpus beyond development-only concerns
 
 ## Pester testing cluster
 Recent ingest work expanded test coverage knowledge with dedicated Pester sources that connect script-level assertions, module isolation techniques, and CI/CD reporting practices. This strengthens links between [[PowerShellTesting]], [[ContinuousIntegration]], and operational reliability work already present in the wiki.
+
+
+## Runspace hosting and concurrency cluster
+New runspace-focused sources add explicit guidance for embedding PowerShell via .NET (`PowerShell` and `InitialSessionState` APIs), constraining command surfaces, and scaling work through producer-consumer queue orchestration. These additions connect architecture concerns with performance-oriented parallel execution patterns.
