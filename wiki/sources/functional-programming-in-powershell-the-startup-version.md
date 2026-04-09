@@ -20,10 +20,10 @@ This is an alternate markdown capture of the same Christopher Kuech functional-p
 > "PowerShell isn’t a purely functional language, but PowerShell very elegantly integrates some functional concepts into its semantics."
 
 ## Connections
-- [[Functional Programming in PowerShell]] — same underlying article represented from a different markdown capture.
+- [[FunctionalProgramming]] — same underlying article represented from a different markdown capture.
 - [[FunctionalProgramming]] — unchanged main concept.
 - [[ScriptBlocks]] — still central to the article.
 - [[HigherOrderFunctions]] — still central to the article.
 
 ## Contradictions
-- Largely duplicates [[Functional Programming in PowerShell]] rather than contradicting it.
+- Largely duplicates [[FunctionalProgramming]] rather than contradicting it.

@@ -6,4 +6,4 @@ sources: [01-functional-programming-in-powershell, 02-declarative-devops, 03-dev
 last_updated: "2026-04-08"
 ---
 
-Christopher Kuech is the author of the ingested [[DeclarativeDevOpsMicroframeworks]] material and the duplicated markdown captures of [[Functional Programming in PowerShell]]. Across these sources, he consistently argues for smaller abstractions, more declarative and functional styles, and PowerShell designs that are testable, portable, and idempotent.
+Christopher Kuech is the author of the ingested [[DeclarativeDevOpsMicroframeworks]] material and the duplicated markdown captures of [[FunctionalProgramming]]. Across these sources, he consistently argues for smaller abstractions, more declarative and functional styles, and PowerShell designs that are testable, portable, and idempotent.
