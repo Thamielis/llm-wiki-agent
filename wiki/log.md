@@ -5,6 +5,12 @@ Append-only chronological record of all operations.
 Format: `## [YYYY-MM-DD] <operation> | <title>`
 
 ## [2026-04-08] lint | Wiki health check
+## [2026-04-08] ingest | Checking User Logon History in Active Directory Domain with PowerShell  Windows OS Hub
+## [2026-04-08] ingest | Find the Current User Logged on a Remote Computer  Windows OS Hub
+## [2026-04-08] ingest | How to Automatically Disable Wi-Fi When Ethernet is Connected  Windows OS Hub
+## [2026-04-08] ingest | How to Create and Manage Scheduled Tasks with PowerShell  Windows OS Hub
+## [2026-04-08] ingest | Running PowerShell Script (.PS1) as a Windows Service  Windows OS Hub
+## [2026-04-08] lint | Wiki health check
 ## [2026-04-08] ingest | Inhaltsverzeichnis für PowerShell\Basics
 ## [2026-04-08] ingest | 5 PowerShell Script Examples To Inspire You to Get Scripting
 ## [2026-04-08] ingest | 5 PowerShell Tips Every User Needs to Know

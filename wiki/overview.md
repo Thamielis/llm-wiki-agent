@@ -49,3 +49,7 @@ Recent ingest work added troubleshooting-pack operations, event-log parsing prac
 
 ## PowerShell basics cluster
 This batch expands beginner/fundamental coverage with starter script examples, shell prompt customization, anonymous-function/scriptblock semantics, and practical usage tips around help, execution policy, and remoting.
+
+
+## Woshub operations cluster
+This increment adds pragmatic admin playbooks for AD logon auditing, remote logged-on-user discovery, scheduled-task automation, Wi-Fi/Ethernet switching control, and service-hosted PowerShell execution.
