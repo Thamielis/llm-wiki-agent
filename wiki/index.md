@@ -6,6 +6,11 @@ This file is maintained by the LLM. Updated on every ingest.
 - [Overview](overview.md) — living synthesis across all sources
 
 ## Sources
+- [Checking User Logon History in Active Directory Domain with PowerShell  Windows OS Hub](sources/checking-user-logon-history-in-active-directory-domain-with-powershell-windows-os-hub.md) — domain logon history reconstruction via DC security events
+- [Find the Current User Logged on a Remote Computer  Windows OS Hub](sources/find-the-current-user-logged-on-a-remote-computer-windows-os-hub.md) — remote logged-on user discovery with WMI/CIM and session tools
+- [How to Automatically Disable Wi-Fi When Ethernet is Connected  Windows OS Hub](sources/how-to-automatically-disable-wi-fi-when-ethernet-is-connected-windows-os-hub.md) — automated adapter switching via events/scripts/policies
+- [How to Create and Manage Scheduled Tasks with PowerShell  Windows OS Hub](sources/how-to-create-and-manage-scheduled-tasks-with-powershell-windows-os-hub.md) — full lifecycle management of task scheduler jobs with PowerShell
+- [Running PowerShell Script (.PS1) as a Windows Service  Windows OS Hub](sources/running-powershell-script-ps1-as-a-windows-service-windows-os-hub.md) — script-as-service hosting strategies and operational caveats
 - [Inhaltsverzeichnis für PowerShell\Basics](sources/basics-toc.md) — index marker for foundational PowerShell tutorials
 - [5 PowerShell Script Examples To Inspire You to Get Scripting](sources/5-powershell-script-examples-to-inspire-you-to-get-scripting.md) — practical starter scripts for registry/services/CIM/install/error handling
 - [5 PowerShell Tips Every User Needs to Know](sources/5-powershell-tips-every-user-needs-to-know.md) — execution/help/remoting fundamentals and usage heuristics
