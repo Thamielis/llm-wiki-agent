@@ -16,6 +16,30 @@ This file is maintained by the LLM. Updated on every ingest.
 - [5 PowerShell Tips Every User Needs to Know](sources/5-powershell-tips-every-user-needs-to-know.md) — execution/help/remoting fundamentals and usage heuristics
 - [Adjust prompt function in PowerShell](sources/adjust-prompt-function-in-powershell.md) — session-context prompt customization pattern
 - [Anonymous Functions in PowerShell](sources/anonymous-functions-in-powershell.md) — script-block-as-anonymous-function semantics and delegate interop
+- [Back to Basics: Understanding PowerShell Objects](sources/back-to-basics-understanding-powershell-objects.md) — beginner primer on PowerShell objects, members, custom objects, and comparisons
+- [Calling Async .NET Methods from PowerShell](sources/calling-async-net-methods-from-powershell.md) — async .NET interop pattern using `GetAwaiter().GetResult()` and task helpers
+- [Create-Table function - working with Data Tables in PowerShell - Powershellbros.com](sources/create-table-function-working-with-data-tables-in-powershell-powershellbros-com.md) — typed `DataTable` helper for structured tabular data
+- [Create-Table function - working with Data Tables in PowerShell](sources/create-table-function-working-with-data-tables-in-powershell.md) — duplicate capture of the typed `DataTable` helper
+- [Dynamic Write-Progress Percentages](sources/dynamic-write-progress-percentages.md) — self-counting progress reporting to avoid hard-coded percent values
+- [Enhance PowerShell with the PSReadLine Module](sources/enhance-powershell-with-the-psreadline-module.md) — interactive shell history, editing, and customization via PSReadLine
+- [Export command output into two columns CSV file](sources/export-command-output-into-two-columns-csv-file.md) — property/value flattening into a two-column CSV
+- [Export-Csv: Converting Objects to CSV Files](sources/export-csv-converting-objects-to-csv-files.md) — object-to-CSV export mechanics, parameters, and quoting behavior
+- [Further Down the Rabbit Hole: PowerShell Modules and Encapsulation - Simple Talk](sources/further-down-the-rabbit-hole-powershell-modules-and-encapsulation-simple-talk.md) — functions, files, modules, manifests, help, and strict mode
+- [How to add progress bar in your PowerShell scripts - Powershellbros.com](sources/how-to-add-progress-bar-in-your-powershell-scripts-powershellbros-com.md) — progress-bar feedback for longer-running scripts
+- [How to Manage Windows Services with PowerShell](sources/how-to-manage-windows-services-with-powershell.md) — service lifecycle inspection and control with cmdlets
+- [How to modify the registry for all users with PowerShell - PDQ](sources/how-to-modify-the-registry-for-all-users-with-powershell-pdq.md) — broad registry updates applied across users
+- [How to Use PowerShell Where-Object to Filter All the Things](sources/how-to-use-powershell-where-object-to-filter-all-the-things.md) — pipeline filtering with script blocks and comparisons
+- [Mastering PowerShell Try Catch with Exception Messages](sources/mastering-powershell-try-catch-with-exception-messages.md) — explicit exception handling and message extraction
+- [Navigating the Nuances of PowerShell Syntax with Get-Help and Get-Command](sources/navigating-the-nuances-of-powershell-syntax-with-get-help-and-get-command.md) — command discovery and syntax exploration with native help
+- [PowerShell - CustomObject](sources/powershell-customobject.md) — ad hoc object creation with `PSCustomObject`
+- [PowerShell Classes Getting Started](sources/powershell-classes-getting-started.md) — introduction to class-based PowerShell design
+- [PowerShell Cmdlet finden - 9 Möglichkeiten der Suche](sources/powershell-cmdlet-finden-9-moglichkeiten-der-suche.md) — several ways to find cmdlets quickly
+- [PowerShell Collections Hashtable](sources/powershell-collections-hashtable.md) — keyed lookup structures and collection basics
+- [Powershell Everything you wanted to know about arrays](sources/powershell-everything-you-wanted-to-know-about-arrays.md) — array fundamentals and usage patterns
+- [Powershell ForEach Loop A Versatile Option in the Scripting World](sources/powershell-foreach-loop-a-versatile-option-in-the-scripting-world.md) — iterative collection processing with `foreach`
+- [PowerShell Logging Recording and Auditing all the Things](sources/powershell-logging-recording-and-auditing-all-the-things.md) — observable scripting and audit trails
+- [PowerShell module browser is now available](sources/powershell-module-browser-is-now-available.md) — module discovery and browsing support
+- [PowerShell Objekt Analyse - Einfach in 3 Schritten gezeigt](sources/powershell-objekt-analyse-einfach-in-3-schritten-gezeigt.md) — stepwise object inspection workflow
 - [Windows Troubleshooting](sources/windows-troubleshooting-index.md) — section index connecting triage and troubleshooting-pack workflows
 - [The Top 10 PowerShell Commands Every Sysadmin Should Know](sources/top-powershell-commands.md) — concise baseline cmdlet checklist for operators
 - [10 PowerShell commands every sysadmin should know](sources/10-powershell-commands-for-sysadmins.md) — expanded practical walkthrough of foundational cmdlets
@@ -76,6 +100,8 @@ This file is maintained by the LLM. Updated on every ingest.
 - [Inhaltsverzeichnis für PowerShell\Klassen](sources/klassen-toc.md) — object-oriented and class-centric PowerShell guidance
 - [New to PowerShell? Use Classes | by Christopher Kuech | in ITNEXT - Freedium](sources/new-to-powershell-use-classes.md) — object-oriented and class-centric PowerShell guidance
 - [Playing with Classes in PowerShell v5 Preview](sources/playing-with-classes-in-powershell-v5-preview.md) — object-oriented and class-centric PowerShell guidance
+- [Powershell v5 Classes & Concepts](sources/powershell-v5-classes-concepts.md) — long-form tutorial on PowerShell v5 classes, OOP, and design patterns
+- [Powershell v5 Classes & Concepts (HTML)](sources/powershell-v5-classes-concepts-html.md) — HTML-rendered capture of the same class and OOP tutorial
 - [PowerShell Classes - Your Ultimate Guide - Petri IT Knowledgebase](sources/powershell-classes-your-ultimate-guidepowershell-classes-your-ultimate-guide.md) — object-oriented and class-centric PowerShell guidance
 - [PowerShell-Klassen – Ihr ultimativer Leitfaden – Petri IT Knowledgebase](sources/powershell-classes-your-ultimate-guide-de.md) — object-oriented and class-centric PowerShell guidance
 - [PowerShell Design Patterns](sources/powershell-and-design-patterns.md) — object-oriented and class-centric PowerShell guidance
@@ -101,22 +127,28 @@ This file is maintained by the LLM. Updated on every ingest.
 - [Declarative Idempotency](sources/07-declarative-idempotency.md) — a requirement-driven engine for synchronous, validated, consistently logged idempotent automation
 - [Automating Work-Item Management](sources/08-automating-work-item-management.md) — turning TODO comments into structured work items with PowerShell regex and pipeline transforms
 - [Declarative DevOps Microframeworks Series Overview](sources/declarative-devops-microframeworks-series-overview.md) — landing page that organizes the series into concepts and applied walkthroughs
+- [Declarative DevOps Microframeworks](sources/declarative-devops-microframeworks.md) — series landing page for declarative DevOps patterns and walkthroughs
 - [Display-Object: a PowerShell utility Cmdlet](sources/display-object-a-powershell-utility-cmdlet.md) — recursive object-path introspection for exploring nested PowerShell values
 - [Formatting Objects without XML](sources/formatting-objects-without-xml.md) — using PowerShell formatting classes and builders instead of handwritten ps1xml
 - [Functional Programming in PowerShell - The Startup Version](sources/functional-programming-in-powershell-the-startup-version.md) — alternate markdown capture of the same functional-programming article with fuller inline examples
 - [Functional Programming in PowerShell - Original Markdown Version](sources/functional-programming-in-powershell-original-markdown-version.md) — another markdown capture of the same functional-programming article, preserved for provenance
+- [Functional Programming in PowerShell - The Startup](sources/functional-programming-in-powershell-the-startup.md) — alternate capture of the functional-programming article with series context
+- [Functional Programming in PowerShell](sources/functional-programming-in-powershell.md) — main functional-programming article on pure functions, closures, and higher-order functions
 - [How to Write Better PowerShell Scripts: Architecture and Best Practices](sources/how-to-write-better-powershell-scripts-architecture-and-best-practices.md) — general best-practice guidance for script architecture, parameters, output, errors, and testing
 - [Invocation Operators, States and Scopes](sources/invocation-operators-states-and-scopes.md) — deep dive into invocation operators, session state, module scope, and dot-sourcing behavior
 - [Top 20 PowerShell Modul- und Skriptvorlagen](sources/top-20-powershell-modul-und-skriptvorlagen.md) — German roundup of PowerShell module and script templates with pros and cons
+- [Top 20 PowerShell Modul- und Skriptvorlagen](sources/top-20-powershellmodulundscriptvorlagen.md) — duplicate capture of the German template roundup and scaffold survey
 - [Documenting Your PowerShell Binary Cmdlets](sources/documenting-your-powershell-binary-cmdlets.md) — documenting C# cmdlets through XmlDoc2CmdletDoc instead of hand-authored MAML
 - [Further Down the Rabbit Hole: PowerShell Modules and Encapsulation](sources/further-down-the-rabbit-hole-powershell-modules-and-encapsulation.md) — why modules are PowerShell's practical route to encapsulation and safer reuse
 - [How To Document Your PowerShell Library](sources/how-to-document-your-powershell-library.md) — generating browsable HTML API documentation trees above standard Get-Help
 - [PowerShell-Docs Style Guide](sources/powershell-docs-style-guide.md) — official conventions for syntax, examples, and PlatyPS-backed cmdlet reference articles
+- [PowerShell-Docs style guide - PowerShell](sources/powershell-docs-style-guide-powershell.md) — PowerShell documentation formatting rules for Markdown, syntax, and cmdlet reference structure
 - [The PowerShell Script Orchestrator](sources/the-powershell-script-orchestrator.md) — PowerShell as a workflow glue layer across web APIs and external services
 - [Towards the Perfect Build](sources/towards-the-perfect-build.md) — PowerShell-driven build, deployment, smoke-test, and bootstrap automation
 - [Unified Approach to Generating Documentation for PowerShell Cmdlets](sources/unified-approach-to-generating-documentation-for-powershell-cmdlets.md) — wallchart synthesis tying cmdlet help generation to browsable API docs
 - [Using C to Create PowerShell Cmdlets: The Basics](sources/using-c-to-create-powershell-cmdlets-the-basics.md) — step-by-step recipe for native-feeling C# cmdlets in PowerShell
 - [Automate Jira and GitHub with Codex](sources/automate-jira-and-github-with-codex.md) — cookbook workflow for label-triggered Jira-to-PR automation through GitHub Actions and Codex
+- [Automate Jira ↔ GitHub with Codex](sources/automate-jira-github-with-codex.md) — cookbook workflow for Jira-triggered Codex implementation through GitHub Actions
 - [Abstract Syntax Tree - powershell.one](sources/abstract-syntax-tree-powershell-one.md) — ingested in batch continuation from `AST`
 - [Advanced Tokenizing PowerShell Scripts - powershell.one](sources/advanced-tokenizing-powershell-scripts-powershell-one.md) — ingested in batch continuation from `AST`
 - [Tokenizing PowerShell Scripts - powershell.one](sources/tokenizing-powershell-scripts-powershell-one.md) — ingested in batch continuation from `AST`

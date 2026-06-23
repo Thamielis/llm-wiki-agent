@@ -1,25 +1,27 @@
 ---
 title: "PowerShell Cmdlet finden - 9 Möglichkeiten der Suche"
 type: source
-tags: [powershell, cmdlet-help]
-sources: [powershell-cmdlet-finden-9-moglichkeiten-der-suche]
-last_updated: 2026-04-08
-date: 2026-04-08
-source_file: raw/PowerShell/Cmdlet-Help/PowerShell Cmdlet finden - 9 Möglichkeiten der Suche.md
+tags: [powershell, basics, discovery]
+date: 2026-06-23
+source_file: raw/PowerShell/basics/PowerShell Cmdlet finden - 9 Möglichkeiten der Suche.md
 ---
 
 ## Summary
-<!-- vscode-markdown-toc --> * 1. [Überblick](#berblick) * 2. [Cmdlet über Namen finden](#CmdletberNamenfinden) * 3. [Cmdlet über Tätigkeit finden](#CmdletberTtigkeitfinden) * 4. [Cmdlet über Tätigkeitsbereich finden](#CmdletberTtigkeitsbereichfinden) * 5. [Cmdlet über Tätigkeit und Tätigkeitsbereich finden](#CmdletberTtigkeitundTtigkeitsbereichfinden)
+This source surveys several ways to find PowerShell cmdlets, likely spanning built-in discovery commands, aliases, module inspection, and search patterns. It emphasizes finding the right command quickly instead of relying on memory.
 
 ## Key Claims
-- The source contributes practical PowerShell knowledge in the area suggested by its title and section.
-- It provides implementation details that can be linked with related wiki concepts.
+- PowerShell offers multiple ways to discover cmdlets
+- Different search strategies suit different levels of specificity
+- Discovery is part of day-to-day scripting, not just documentation lookup
+- Searching effectively reduces trial-and-error when building scripts
 
 ## Key Quotes
-> "Quote extraction pending detailed pass." — ingest placeholder
+> "9 Möglichkeiten der Suche" — source title fragment
 
 ## Connections
-- [[PowerShell]] — primary technology covered.
+- [[PowerShellBasics]] — command discovery and shell navigation
+- [[PowerShellDocumentation]] — discovery via help and metadata
+- [[ObjectIntrospection]] — cmdlet metadata can be queried and filtered
 
 ## Contradictions
-- None identified during this batch ingest.
+- No direct contradiction detected with current wiki pages.

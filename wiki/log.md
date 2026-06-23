@@ -166,3 +166,35 @@ Format: `## [YYYY-MM-DD] <operation> | <title>`
 ## [2026-04-08] ingest | Graph theory with PowerShell -part 2 – Tech thoughts
 ## [2026-04-08] ingest | Graph theory with PowerShell – Tech thoughts
 ## [2026-04-08] ingest | A Quick Guide to Building PowerShell Async Functions
+## [2026-06-23] ingest | Powershell v5 Classes & Concepts
+## [2026-06-23] ingest | Powershell v5 Classes & Concepts (HTML)
+## [2026-06-23] ingest | Declarative DevOps Microframeworks
+## [2026-06-23] ingest | PowerShell-Docs style guide - PowerShell
+## [2026-06-23] ingest | Functional Programming in PowerShell - The Startup
+## [2026-06-23] ingest | Functional Programming in PowerShell
+## [2026-06-23] ingest | Automate Jira ↔ GitHub with Codex
+## [2026-06-23] ingest | Top 20 PowerShell Modul- und Skriptvorlagen
+## [2026-06-23] ingest | Back to Basics: Understanding PowerShell Objects
+## [2026-06-23] ingest | Calling Async .NET Methods from PowerShell
+## [2026-06-23] ingest | Create-Table function - working with Data Tables in PowerShell - Powershellbros.com
+## [2026-06-23] ingest | Create-Table function - working with Data Tables in PowerShell
+## [2026-06-23] ingest | Dynamic Write-Progress Percentages
+## [2026-06-23] ingest | Enhance PowerShell with the PSReadLine Module
+## [2026-06-23] ingest | Export command output into two columns CSV file
+## [2026-06-23] ingest | Export-Csv: Converting Objects to CSV Files
+## [2026-06-23] ingest | Further Down the Rabbit Hole: PowerShell Modules and Encapsulation - Simple Talk
+## [2026-06-23] ingest | How to add progress bar in your PowerShell scripts - Powershellbros.com
+## [2026-06-23] ingest | How to Manage Windows Services with PowerShell
+## [2026-06-23] ingest | How to modify the registry for all users with PowerShell - PDQ
+## [2026-06-23] ingest | How to Use PowerShell Where-Object to Filter All the Things
+## [2026-06-23] ingest | Mastering PowerShell Try Catch with Exception Messages
+## [2026-06-23] ingest | Navigating the Nuances of PowerShell Syntax with Get-Help and Get-Command
+## [2026-06-23] ingest | PowerShell - CustomObject
+## [2026-06-23] ingest | PowerShell Classes Getting Started
+## [2026-06-23] ingest | PowerShell Cmdlet finden - 9 Möglichkeiten der Suche
+## [2026-06-23] ingest | PowerShell Collections Hashtable
+## [2026-06-23] ingest | Powershell Everything you wanted to know about arrays
+## [2026-06-23] ingest | Powershell ForEach Loop A Versatile Option in the Scripting World
+## [2026-06-23] ingest | PowerShell Logging Recording and Auditing all the Things
+## [2026-06-23] ingest | PowerShell module browser is now available
+## [2026-06-23] ingest | PowerShell Objekt Analyse - Einfach in 3 Schritten gezeigt

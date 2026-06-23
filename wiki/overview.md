@@ -3,7 +3,7 @@ title: "Overview"
 type: "synthesis"
 tags: [powershell, devops, architecture]
 sources: [01-functional-programming-in-powershell, 02-declarative-devops, 03-devops-microframeworks, 04-private-powershell-modules, 05-writing-maintainable-powershell, 06-declarative-config-management, 07-declarative-idempotency, 08-automating-work-item-management, declarative-devops-microframeworks-series-overview, display-object-a-powershell-utility-cmdlet, formatting-objects-without-xml, functional-programming-in-powershell-the-startup-version, functional-programming-in-powershell-original-markdown-version, how-to-write-better-powershell-scripts-architecture-and-best-practices, invocation-operators-states-and-scopes, top-20-powershell-modul-und-skriptvorlagen, development-index, documenting-your-powershell-binary-cmdlets, further-down-the-rabbit-hole-powershell-modules-and-encapsulation, how-to-document-your-powershell-library, powershell-docs-style-guide, the-powershell-script-orchestrator, towards-the-perfect-build, unified-approach-to-generating-documentation-for-powershell-cmdlets, using-c-to-create-powershell-cmdlets-the-basics, automate-jira-and-github-with-codex]
-last_updated: "2026-04-08"
+last_updated: "2026-06-23"
 ---
 
 # Overview
@@ -20,7 +20,11 @@ The corpus still contains duplicate captures of the same functional-programming 
 A fifth and sixth cluster now extend the corpus beyond development-only concerns: an Active Directory administration set (health reporting, identity lifecycle scripting, GPO export/reporting, lockout/SPN diagnostics, and gMSA operationalization) plus a class-centric PowerShell design set (class syntax, migration from custom objects, module architecture with classes, testability, and design patterns). Together they push the wiki toward enterprise operations and object-oriented script architecture while remaining consistent with existing emphasis on maintainability and reusable abstractions.
 
 ## Recent Batch Updates
+- 2026-06-23: Added 10 more PowerShell basics sources covering syntax discovery, custom objects, classes, cmdlet search, collections, arrays, foreach iteration, logging/auditing, module browsing, and object analysis.
+- 2026-06-23: Added 10 more PowerShell basics sources covering dynamic progress reporting, PSReadLine, CSV shaping/export, module encapsulation, service and registry management, Where-Object filtering, and try/catch error handling.
 - 2026-04-08: Added 50 additional sources spanning AST parsing, DSC, DNS/EventLog, forensics, and operational HowTos.
+- 2026-06-23: Added two alternate captures of the "Powershell v5 Classes & Concepts" article, extending the classes/OOP cluster with fuller coverage of abstract classes, factories, method chaining, and class-loading constraints.
+- 2026-06-23: Added 10 more missing sources across series landing pages, documentation style guidance, functional programming, Jira/GitHub automation, objects, async .NET interop, and `DataTable` helper patterns.
 
 
 ## Pester testing cluster
