@@ -6,6 +6,46 @@ This file is maintained by the LLM. Updated on every ingest.
 - [Overview](overview.md) — living synthesis across all sources
 
 ## Sources
+- [Checking User Logon History in Active Directory Domain with PowerShell  Windows OS Hub](sources/checking-user-logon-history-in-active-directory-domain-with-powershell-windows-os-hub.md) — domain logon history reconstruction via DC security events
+- [Find the Current User Logged on a Remote Computer  Windows OS Hub](sources/find-the-current-user-logged-on-a-remote-computer-windows-os-hub.md) — remote logged-on user discovery with WMI/CIM and session tools
+- [How to Automatically Disable Wi-Fi When Ethernet is Connected  Windows OS Hub](sources/how-to-automatically-disable-wi-fi-when-ethernet-is-connected-windows-os-hub.md) — automated adapter switching via events/scripts/policies
+- [How to Create and Manage Scheduled Tasks with PowerShell  Windows OS Hub](sources/how-to-create-and-manage-scheduled-tasks-with-powershell-windows-os-hub.md) — full lifecycle management of task scheduler jobs with PowerShell
+- [Running PowerShell Script (.PS1) as a Windows Service  Windows OS Hub](sources/running-powershell-script-ps1-as-a-windows-service-windows-os-hub.md) — script-as-service hosting strategies and operational caveats
+- [Inhaltsverzeichnis für PowerShell\Basics](sources/basics-toc.md) — index marker for foundational PowerShell tutorials
+- [5 PowerShell Script Examples To Inspire You to Get Scripting](sources/5-powershell-script-examples-to-inspire-you-to-get-scripting.md) — practical starter scripts for registry/services/CIM/install/error handling
+- [5 PowerShell Tips Every User Needs to Know](sources/5-powershell-tips-every-user-needs-to-know.md) — execution/help/remoting fundamentals and usage heuristics
+- [Adjust prompt function in PowerShell](sources/adjust-prompt-function-in-powershell.md) — session-context prompt customization pattern
+- [Anonymous Functions in PowerShell](sources/anonymous-functions-in-powershell.md) — script-block-as-anonymous-function semantics and delegate interop
+- [Windows Troubleshooting](sources/windows-troubleshooting-index.md) — section index connecting triage and troubleshooting-pack workflows
+- [The Top 10 PowerShell Commands Every Sysadmin Should Know](sources/top-powershell-commands.md) — concise baseline cmdlet checklist for operators
+- [10 PowerShell commands every sysadmin should know](sources/10-powershell-commands-for-sysadmins.md) — expanded practical walkthrough of foundational cmdlets
+- [Diagnosing common Windows problems with PowerShell troubleshooting packs](sources/diagnosing-common-windows-problems-with-powershell-troubleshooting-packs.md) — built-in troubleshooting-pack usage for root-cause diagnosis
+- [Windows Triaging with Powershell - Part 1 - Parsing Event Logs](sources/windows-triaging-with-powershell-part-1-parsing-event-logs.md) — event-log-centric triage workflow and report scripting
+- [Windows Triaging with Powershell - Part 2 - Artifacts Collection](sources/windows-triaging-with-powershell-part-2-artifacts-collection.md) — broad forensic/IR artifact collection procedures
+- [How to Connect to Remote Computer PowerShell Detailed Guides](sources/how-to-connect-to-remote-computer-powershell-detailed-guides.md) — PSRemoting and Invoke-Command remote access patterns
+- [Use PowerShell function to get reboot details remotely - Powershellbros.com](sources/use-powershell-function-to-get-reboot-details-remotely-powershellbros-com.md) — remote uptime + Event ID 1074 reboot audit reporting
+- [Kill process remotely using PowerShell function - Powershellbros.com](sources/kill-process-remotely-using-powershell-function-powershellbros-com.md) — interactive remote process termination workflow with confirmation gating
+- [Uninstall applications on multiple machines - Powershellbros.com](sources/uninstall-applications-on-multiple-machines-powershellbros-com.md) — CSV-driven remote uninstall workflow with categorized outcomes
+- [How to reboot the server remotely via PowerShell](sources/how-to-reboot-the-server-remotely-via-powershell.md) — shutdown/restart/PSSession fallback reboot playbook
+- [Use PowerShell function to check if servers are accessible - Powershellbros.com](sources/use-powershell-function-to-check-if-servers-are-accessible-powershellbros-com.md) — SMB-share reachability function for quick server-up/down checks
+- [Get netstat and traceroute results from remote servers - Powershellbros.com](sources/get-netstat-and-traceroute-results-from-remote-servers-powershellbros-com.md) — remote netstat/traceroute collection with per-host artifact output
+- [How to check password for WiFi networks - Powershellbros.com](sources/how-to-check-password-for-wifi-networks-powershellbros-com.md) — parses cached WLAN profiles and key data via `netsh`
+- [PowerShell one-liner Test connectivity - Powershellbros.com](sources/powershell-one-liner-test-connectivity-powershellbros-com.md) — compact Test-Connection/Test-NetConnection connectivity patterns
+- [Test multiple ports on remote servers using PowerShell script - Powershellbros.com](sources/test-multiple-ports-on-remote-servers-using-powershell-script-powershellbros-com.md) — multi-port remoting checks for AD/infra service paths
+- [Inhaltsverzeichnis für PowerShell\00-ToInclude\PS\SCCM](sources/sccm-toc.md) — section index marker for the SCCM automation corpus
+- [Inhaltsverzeichnis für PowerShell\00-ToInclude\PS\PSAppDeployToolkit](sources/psappdeploytoolkit-toc.md) — subsection marker for deployment-toolkit content
+- [Get pending updates in Software Center on remote machines - Powershellbros.com](sources/get-pending-updates-in-software-center-on-remote-machines-powershellbros-com.md) — remote SCCM update-state reporting via `CCM_SoftwareUpdate`
+- [PowerShell scripting template for SCCM packages](sources/powershell-scripting-template-for-sccm-packages.md) — reusable phased deployment-wrapper template for SCCM/MDT packages
+- [How to gather SCCM device collections - Powershellbros.com](sources/how-to-gather-sccm-device-collections-powershellbros-com.md) — per-device collection-membership reporting workflow
+- [Get list of unhealthy SCOM agents (grey state) using PowerShell - Powershellbros.com](sources/get-list-of-unhealthy-scom-agents-grey-state-using-powershell-powershellbros-com.md) — unhealthy-agent triage export via OperationsManager cmdlets
+- [Run SCCM client actions on remote machines using PowerShell script - Powershellbros.com](sources/run-sccm-client-actions-on-remote-machines-using-powershell-script-powershellbros-com.md) — schedule-ID mapped remote SCCM client action orchestration
+- [Creating Runspaces - PowerShell](sources/creating-runspaces-powershell.md) — defines runspaces and custom `InitialSessionState` setup for host applications
+- [Adding and invoking commands - PowerShell](sources/adding-and-invoking-commands-powershell.md) — .NET hosting API patterns for synchronous/asynchronous pipeline execution
+- [Producer Consumer Parallelism in PowerShell](sources/producer-consumer-parallelism-in-powershell.md) — queue-based runspace parallelism pattern with practical performance gains
+- [Windows PowerShell Host Quickstart - PowerShell](sources/windows-powershell-host-quickstart-powershell.md) — embedding quickstart for default vs constrained runspaces
+- [Pester](sources/pester-index.md) — table-of-contents source that maps the Pester testing subset
+- [Pester framework for Powershell testing - part 1](sources/pester-framework-for-powershell-testing-part-1.md) — introductory `Describe`/`Context`/`It` usage for workstation health checks
+- [Erstellen von Pester v5 Tests für die PowerShell-Modulentwicklung](sources/pester-v5-tests-fur-powershell.md) — advanced Pester v5 mocks, TestDrive isolation, and CI/coverage workflows
 - [Loop each user](sources/adsi-searching-for-an-user-object-in-active-directory-powershellbros-com.md) — Active Directory operations, reporting, and automation patterns
 - [Active Directory Scripts Galore: Come and Get It!](sources/active-directory-scripts-galore-come-and-get-it.md) — Active Directory operations, reporting, and automation patterns
 - [Inhaltsverzeichnis für PowerShell\00-ToInclude\PS\ActiveDirectory](sources/activedirectory-toc.md) — Active Directory operations, reporting, and automation patterns
@@ -128,6 +168,11 @@ This file is maintained by the LLM. Updated on every ingest.
 - [Graph theory with PowerShell – Tech thoughts](sources/graph-theory-with-powershell.md) — ingested in batch continuation from `Graphs`
 - [A Quick Guide to Building PowerShell Async Functions](sources/a-quick-guide-to-building-powershell-async-functions.md) — ingested in batch continuation from `HowTos`
 ## Entities
+- [Dennis Span](entities/DennisSpan.md) — author of SCCM/MDT deployment scripting template patterns
+- [SCOM](entities/SCOM.md) — monitoring platform used for unhealthy-agent discovery and triage exports
+- [SCCM](entities/SCCM.md) — endpoint-management platform for client actions, update workflows, and collection reporting
+- [Lee Holmes](entities/LeeHolmes.md) — author documenting producer-consumer runspace parallelism patterns in PowerShell
+- [Pester](entities/Pester.md) — PowerShell testing framework spanning baseline checks to v5 CI-ready module tests
 - [Active Directory](entities/ActiveDirectory.md) — Windows directory service domain for account, policy, and infrastructure automation
 - [PowerShell Classes](entities/PowerShellClasses.md) — class-based PowerShell design and implementation techniques
 - [Christopher Kuech](entities/ChristopherKuech.md) — author of the series-heavy PowerShell architecture corpus
@@ -149,6 +194,14 @@ This file is maintained by the LLM. Updated on every ingest.
 - [Codex](entities/Codex.md) — coding agent embedded in the cookbook ticket-to-PR loop
 
 ## Concepts
+- [PowerShell Basics](concepts/PowerShellBasics.md) — foundational cmdlet literacy, script structure, and shell/remoting essentials
+- [Windows Troubleshooting](concepts/WindowsTroubleshooting.md) — troubleshooting packs, triage artifact collection, and remediation workflows
+- [Remote Operations](concepts/RemoteOperations.md) — remote reboot, process control, and software uninstallation administration patterns
+- [Network Diagnostics](concepts/NetworkDiagnostics.md) — scripted connectivity, traceroute, and multi-port validation patterns
+- [Monitoring Automation](concepts/MonitoringAutomation.md) — scripted monitoring triage and reporting workflows (SCOM-focused)
+- [SCCM Automation](concepts/SCCMAutomation.md) — ConfigMgr-oriented scripting for updates, actions, collections, and package deployments
+- [Parallel Processing](concepts/ParallelProcessing.md) — asynchronous pipelines and producer-consumer runspace workers for throughput
+- [Runspaces](concepts/Runspaces.md) — execution environments that bound command surface and state in hosted PowerShell
 - [Object-Oriented PowerShell](concepts/ObjectOrientedPowerShell.md) — using classes, inheritance, and encapsulation in PowerShell automation
 - [AD Administration](concepts/ADAdministration.md) — PowerShell-driven Active Directory user, group, policy, and service-account management
 - [Functional Programming](concepts/FunctionalProgramming.md) — data-first, transformation-oriented PowerShell design

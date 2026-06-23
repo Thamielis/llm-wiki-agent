@@ -26,4 +26,4 @@ This markdown file is a landing page for the Declarative DevOps Microframeworks 
 - [[DeclarativeDevOps]] — one of the primary conceptual chapters in the reading order.
 
 ## Contradictions
-- No contradiction, but this page reframes [[Functional Programming in PowerShell]] as adjacent to the series rather than one of its core numbered chapters.
+- No contradiction, but this page reframes [[FunctionalProgramming]] as adjacent to the series rather than one of its core numbered chapters.

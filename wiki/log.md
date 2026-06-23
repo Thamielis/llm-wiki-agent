@@ -4,6 +4,54 @@ Append-only chronological record of all operations.
 
 Format: `## [YYYY-MM-DD] <operation> | <title>`
 
+## [2026-04-08] lint | Wiki health check
+## [2026-04-08] ingest | Checking User Logon History in Active Directory Domain with PowerShell  Windows OS Hub
+## [2026-04-08] ingest | Find the Current User Logged on a Remote Computer  Windows OS Hub
+## [2026-04-08] ingest | How to Automatically Disable Wi-Fi When Ethernet is Connected  Windows OS Hub
+## [2026-04-08] ingest | How to Create and Manage Scheduled Tasks with PowerShell  Windows OS Hub
+## [2026-04-08] ingest | Running PowerShell Script (.PS1) as a Windows Service  Windows OS Hub
+## [2026-04-08] lint | Wiki health check
+## [2026-04-08] ingest | Inhaltsverzeichnis für PowerShell\Basics
+## [2026-04-08] ingest | 5 PowerShell Script Examples To Inspire You to Get Scripting
+## [2026-04-08] ingest | 5 PowerShell Tips Every User Needs to Know
+## [2026-04-08] ingest | Adjust prompt function in PowerShell
+## [2026-04-08] ingest | Anonymous Functions in PowerShell
+## [2026-04-08] lint | Wiki health check
+## [2026-04-08] ingest | Windows Troubleshooting
+## [2026-04-08] ingest | The Top 10 PowerShell Commands Every Sysadmin Should Know
+## [2026-04-08] ingest | 10 PowerShell commands every sysadmin should know
+## [2026-04-08] ingest | Diagnosing common Windows problems with PowerShell troubleshooting packs
+## [2026-04-08] ingest | Windows Triaging with Powershell - Part 1 - Parsing Event Logs
+## [2026-04-08] ingest | Windows Triaging with Powershell - Part 2 - Artifacts Collection
+## [2026-04-08] ingest | How to Connect to Remote Computer PowerShell Detailed Guides
+## [2026-04-08] lint | Wiki health check
+## [2026-04-08] ingest | Use PowerShell function to get reboot details remotely - Powershellbros.com
+## [2026-04-08] ingest | Kill process remotely using PowerShell function - Powershellbros.com
+## [2026-04-08] ingest | Uninstall applications on multiple machines - Powershellbros.com
+## [2026-04-08] ingest | How to reboot the server remotely via PowerShell
+## [2026-04-08] lint | Wiki health check
+## [2026-04-08] ingest | Use PowerShell function to check if servers are accessible - Powershellbros.com
+## [2026-04-08] ingest | Get netstat and traceroute results from remote servers - Powershellbros.com
+## [2026-04-08] ingest | How to check password for WiFi networks - Powershellbros.com
+## [2026-04-08] ingest | PowerShell one-liner Test connectivity - Powershellbros.com
+## [2026-04-08] ingest | Test multiple ports on remote servers using PowerShell script - Powershellbros.com
+## [2026-04-08] lint | Wiki health check
+## [2026-04-08] ingest | Inhaltsverzeichnis für PowerShell\00-ToInclude\PS\SCCM
+## [2026-04-08] ingest | Inhaltsverzeichnis für PowerShell\00-ToInclude\PS\PSAppDeployToolkit
+## [2026-04-08] ingest | Get pending updates in Software Center on remote machines - Powershellbros.com
+## [2026-04-08] ingest | PowerShell scripting template for SCCM packages
+## [2026-04-08] ingest | How to gather SCCM device collections - Powershellbros.com
+## [2026-04-08] ingest | Get list of unhealthy SCOM agents (grey state) using PowerShell - Powershellbros.com
+## [2026-04-08] ingest | Run SCCM client actions on remote machines using PowerShell script - Powershellbros.com
+## [2026-04-08] lint | Wiki health check
+## [2026-04-08] ingest | Creating Runspaces - PowerShell
+## [2026-04-08] ingest | Adding and invoking commands - PowerShell
+## [2026-04-08] ingest | Producer Consumer Parallelism in PowerShell
+## [2026-04-08] ingest | Windows PowerShell Host Quickstart - PowerShell
+## [2026-04-08] lint | Wiki health check
+## [2026-04-08] ingest | Pester
+## [2026-04-08] ingest | Pester framework for Powershell testing - part 1
+## [2026-04-08] ingest | Erstellen von Pester v5 Tests für die PowerShell-Modulentwicklung
 ## [2026-04-08] graph | Knowledge graph rebuilt
 ## [2026-04-08] ingest | Loop each user
 ## [2026-04-08] ingest | Active Directory Scripts Galore: Come and Get It!

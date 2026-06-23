@@ -21,3 +21,35 @@ A fifth and sixth cluster now extend the corpus beyond development-only concerns
 
 ## Recent Batch Updates
 - 2026-04-08: Added 50 additional sources spanning AST parsing, DSC, DNS/EventLog, forensics, and operational HowTos.
+
+
+## Pester testing cluster
+Recent ingest work expanded test coverage knowledge with dedicated Pester sources that connect script-level assertions, module isolation techniques, and CI/CD reporting practices. This strengthens links between [[PowerShellTesting]], [[ContinuousIntegration]], and operational reliability work already present in the wiki.
+
+
+## Runspace hosting and concurrency cluster
+New runspace-focused sources add explicit guidance for embedding PowerShell via .NET (`PowerShell` and `InitialSessionState` APIs), constraining command surfaces, and scaling work through producer-consumer queue orchestration. These additions connect architecture concerns with performance-oriented parallel execution patterns.
+
+
+## SCCM and monitoring operations cluster
+This ingest block adds Configuration Manager and Operations Manager operations content: remote SCCM client schedule triggering, Software Center update reporting, device-collection export routines, package deployment templating, and unhealthy-agent monitoring triage. Together these reinforce the wiki's practical enterprise-ops automation coverage.
+
+
+## Network diagnostics cluster
+This block expands operational troubleshooting content with host reachability checks, one-liner connectivity tests, traceroute/netstat artifact collection, multi-port remoting diagnostics, and local Wi-Fi profile interrogation workflows.
+
+
+## Remote operations cluster
+New remote-administration sources add pragmatic incident-response workflows for reboot diagnostics, emergency reboot execution, interactive remote process termination, and batch software removal across hosts.
+
+
+## Windows troubleshooting cluster
+Recent ingest work added troubleshooting-pack operations, event-log parsing practices, full-spectrum artifact triage collection, and baseline sysadmin command guidance, strengthening the wiki's incident-response and diagnostics depth.
+
+
+## PowerShell basics cluster
+This batch expands beginner/fundamental coverage with starter script examples, shell prompt customization, anonymous-function/scriptblock semantics, and practical usage tips around help, execution policy, and remoting.
+
+
+## Woshub operations cluster
+This increment adds pragmatic admin playbooks for AD logon auditing, remote logged-on-user discovery, scheduled-task automation, Wi-Fi/Ethernet switching control, and service-hosted PowerShell execution.
