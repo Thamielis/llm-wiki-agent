@@ -19,52 +19,70 @@ import argparse
 from pathlib import Path
 from datetime import date
 
-import anthropic
-
-REPO_ROOT = Path(__file__).parent.parent
-WIKI_DIR = REPO_ROOT / "wiki"
-INDEX_FILE = WIKI_DIR / "index.md"
-LOG_FILE = WIKI_DIR / "log.md"
-SCHEMA_FILE = REPO_ROOT / "CLAUDE.md"
-
-
-def read_file(path: Path) -> str:
-    return path.read_text(encoding="utf-8") if path.exists() else ""
-
-
-def write_file(path: Path, content: str):
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(content, encoding="utf-8")
-    print(f"  saved: {path.relative_to(REPO_ROOT)}")
+# Bootstrap shared utilities
+sys.path.insert(0, str(Path(__file__).parent.parent))
+from tools._utils import (
+    REPO_ROOT, WIKI_DIR, INDEX_FILE, LOG_FILE, SCHEMA_FILE,
+    read_file, write_file, call_llm, append_log,
+)
 
 
 def find_relevant_pages(question: str, index_content: str) -> list[Path]:
-    """Extract linked pages from index that seem relevant to the question."""
-    # Pull all [[links]] and markdown links from index
+    """Extract linked pages from index that seem relevant to the question.
+    Uses character-level matching for CJK compatibility."""
     md_links = re.findall(r'\[([^\]]+)\]\(([^)]+)\)', index_content)
-    # Simple keyword match: check if any word in the title appears in the question
     question_lower = question.lower()
     relevant = []
+
     for title, href in md_links:
-        if any(word in question_lower for word in title.lower().split() if len(word) > 3):
+        title_lower = title.lower()
+        # For CJK: check if any 2+ char substring of the title appears in question
+        has_cjk = any('\u4e00' <= ch <= '\u9fff' for ch in title)
+        if has_cjk:
+            # Sliding window: check if any 2-char CJK bigram from title exists in question
+            matched = any(
+                title_lower[j:j+2] in question_lower
+                for j in range(len(title_lower) - 1)
+                if any('\u4e00' <= c <= '\u9fff' for c in title_lower[j:j+2])
+            )
+        else:
+            # Latin: original word-based match (lowered threshold to >2)
+            matched = any(word in question_lower for word in title_lower.split() if len(word) > 2)
+
+        if matched:
             p = WIKI_DIR / href
-            if p.exists():
+            if p.exists() and p not in relevant:
                 relevant.append(p)
+
+    # Also try graph-based expansion: find neighbors of matched pages
+    graph_json = REPO_ROOT / "graph" / "graph.json"
+    if graph_json.exists() and relevant:
+        try:
+            graph_data = json.loads(graph_json.read_text())
+            page_ids = {p.relative_to(WIKI_DIR).as_posix().replace('.md', '') for p in relevant}
+            neighbors = set()
+            for edge in graph_data.get('edges', []):
+                if edge.get('confidence', 0) >= 0.7:
+                    if edge['from'] in page_ids:
+                        neighbors.add(edge['to'])
+                    elif edge['to'] in page_ids:
+                        neighbors.add(edge['from'])
+            for nid in neighbors:
+                np = WIKI_DIR / f"{nid}.md"
+                if np.exists() and np not in relevant:
+                    relevant.append(np)
+        except (json.JSONDecodeError, KeyError):
+            pass
+
     # Always include overview
     overview = WIKI_DIR / "overview.md"
     if overview.exists() and overview not in relevant:
         relevant.insert(0, overview)
-    return relevant[:12]  # cap to avoid context overflow
-
-
-def append_log(entry: str):
-    existing = read_file(LOG_FILE)
-    LOG_FILE.write_text(entry.strip() + "\n\n" + existing, encoding="utf-8")
+    return relevant[:15]  # cap to avoid context overflow
 
 
 def query(question: str, save_path: str | None = None):
     today = date.today().isoformat()
-    client = anthropic.Anthropic()
 
     # Step 1: Read index
     index_content = read_file(INDEX_FILE)
@@ -77,16 +95,10 @@ def query(question: str, save_path: str | None = None):
 
     # If no keyword match, ask Claude to identify relevant pages from the index
     if not relevant_pages or len(relevant_pages) <= 1:
-        print("  selecting relevant pages via Claude...")
-        selection_response = client.messages.create(
-            model="claude-haiku-4-5-20251001",
-            max_tokens=512,
-            messages=[{
-                "role": "user",
-                "content": f"Given this wiki index:\n\n{index_content}\n\nWhich pages are most relevant to answering: \"{question}\"\n\nReturn ONLY a JSON array of relative file paths (as listed in the index), e.g. [\"sources/foo.md\", \"concepts/Bar.md\"]. Maximum 10 pages."
-            }]
-        )
-        raw = selection_response.content[0].text.strip()
+        print("  selecting relevant pages via API...")
+        prompt = f"Given this wiki index:\n\n{index_content}\n\nWhich pages are most relevant to answering: \"{question}\"\n\nReturn ONLY a JSON array of relative file paths (as listed in the index), e.g. [\"sources/foo.md\", \"concepts/Bar.md\"]. Maximum 10 pages."
+        raw = call_llm(prompt, "LLM_MODEL_FAST", "claude-3-5-haiku-latest", max_tokens=512)
+        raw = raw.strip()
         raw = re.sub(r"^```(?:json)?\s*", "", raw)
         raw = re.sub(r"\s*```$", "", raw)
         try:
@@ -108,12 +120,7 @@ def query(question: str, save_path: str | None = None):
 
     # Step 4: Synthesize answer
     print(f"  synthesizing answer from {len(relevant_pages)} pages...")
-    response = client.messages.create(
-        model="claude-sonnet-4-6",
-        max_tokens=4096,
-        messages=[{
-            "role": "user",
-            "content": f"""You are querying an LLM Wiki to answer a question. Use the wiki pages below to synthesize a thorough answer. Cite sources using [[PageName]] wikilink syntax.
+    prompt = f"""You are querying an LLM Wiki to answer a question. Use the wiki pages below to synthesize a thorough answer. Cite sources using [[PageName]] wikilink syntax.
 
 Schema:
 {schema}
@@ -125,10 +132,7 @@ Question: {question}
 
 Write a well-structured markdown answer with headers, bullets, and [[wikilink]] citations. At the end, add a ## Sources section listing the pages you drew from.
 """
-        }]
-    )
-
-    answer = response.content[0].text
+    answer = call_llm(prompt, "LLM_MODEL", "claude-3-5-sonnet-latest", max_tokens=4096)
     print("\n" + "=" * 60)
     print(answer)
     print("=" * 60)
