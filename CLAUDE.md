@@ -8,7 +8,8 @@ This wiki is maintained entirely by Claude Code. No API key or Python scripts ne
 |---|---|
 | `/wiki-ingest` | `ingest raw/my-article.md` |
 | `/wiki-query` | `query: what are the main themes?` |
-| `/wiki-lint` | `lint the wiki` |
+| `/wiki-health` | `health` (fast, every session) |
+| `/wiki-lint` | `lint the wiki` (expensive, periodic) |
 | `/wiki-graph` | `build the knowledge graph` |
 
 Or just describe what you want in plain English:
@@ -34,7 +35,10 @@ wiki/         # Claude owns this layer entirely
   concepts/   # Ideas, frameworks, methods, theories
   syntheses/  # Saved query answers
 graph/        # Auto-generated graph data
-tools/        # Optional standalone Python scripts (require ANTHROPIC_API_KEY)
+tools/        # Standalone Python scripts
+  health.py   # Structural checks (deterministic, no LLM calls)
+  lint.py     # Content quality checks (uses LLM for semantic analysis)
+  build_graph.py  # Knowledge graph generation
 ```
 
 ---
@@ -61,8 +65,10 @@ Use `[[PageName]]` wikilinks to link to other wiki pages.
 
 Triggered by: *"ingest <file>"* or `/wiki-ingest`
 
+**Supported formats:** Markdown (`.md`) ingested directly. Non-markdown files (`.pdf`, `.docx`, `.pptx`, `.xlsx`, `.html`, `.txt`, `.csv`, `.json`, `.xml`, `.rst`, `.rtf`, `.epub`, `.ipynb`, `.yaml`, `.yml`, `.tsv`, `.wav`, `.mp3`) auto-converted to markdown via [markitdown](https://github.com/microsoft/markitdown) before ingestion. Use `--no-convert` to skip auto-conversion.
+
 Steps (in order):
-1. Read the source document fully using the Read tool
+1. Read the source document fully using the Read tool (auto-convert if non-markdown)
 2. Read `wiki/index.md` and `wiki/overview.md` for current wiki context
 3. Write `wiki/sources/<slug>.md` — use the source page format below
 4. Update `wiki/index.md` — add entry under Sources section
@@ -71,6 +77,7 @@ Steps (in order):
 7. Update/create concept pages for key ideas and frameworks discussed
 8. Flag any contradictions with existing wiki content
 9. Append to `wiki/log.md`: `## [YYYY-MM-DD] ingest | <Title>`
+10. **Post-ingest validation** — check for broken `[[wikilinks]]`, verify all new pages are in `index.md`, print a change summary
 
 ### Source Page Format
 
@@ -101,6 +108,48 @@ source_file: raw/...
 - Contradicts [[OtherPage]] on: ...
 ```
 
+### Domain-Specific Templates
+
+If the source falls into a specific domain (e.g., personal diary, meeting notes), the agent should use a specialized template instead of the default generic one above:
+
+#### Diary / Journal Template
+```markdown
+---
+title: "YYYY-MM-DD Diary"
+type: source
+tags: [diary]
+date: YYYY-MM-DD
+---
+## Event Summary
+...
+## Key Decisions
+...
+## Energy & Mood
+...
+## Connections
+...
+## Shifts & Contradictions
+...
+```
+
+#### Meeting Notes Template
+```markdown
+---
+title: "Meeting Title"
+type: source
+tags: [meeting]
+date: YYYY-MM-DD
+---
+## Goal
+...
+## Key Discussions
+...
+## Decisions Made
+...
+## Action Items
+...
+```
+
 ---
 
 ## Query Workflow
@@ -128,6 +177,35 @@ Use Grep and Read tools to check for:
 - **Data gaps** — questions the wiki can't answer; suggest new sources
 
 Output a lint report and ask if the user wants it saved to `wiki/lint-report.md`.
+
+---
+
+## Health Workflow
+
+Triggered by: *"health"* or `/wiki-health`
+
+Run: `python tools/health.py` (or `python tools/health.py --json` for machine-readable output)
+
+Fast structural integrity checks — **zero LLM calls**, safe to run every session:
+- **Empty / stub files** — pages with no content beyond frontmatter (rate-limit damage)
+- **Index sync** — `wiki/index.md` entries vs actual files on disk
+- **Log coverage** — source pages missing a corresponding `ingest` entry in `wiki/log.md`
+
+Output a health report. Use `--save` to write to `wiki/health-report.md`.
+
+### Health vs Lint Boundary
+
+| Dimension | `health` | `lint` |
+|---|---|---|
+| **Scope** | Structural integrity | Content quality |
+| **LLM calls** | Zero | Yes (semantic analysis) |
+| **Cost** | Free | Tokens |
+| **Frequency** | Every session, before other work | Every 10-15 ingests |
+| **Checks** | Empty files, index sync, log sync | Orphans, broken links, contradictions, gaps |
+| **Tool** | `tools/health.py` | `tools/lint.py` |
+| **Run order** | First (pre-flight) | After health passes |
+
+> Run `health` first — linting an empty file wastes tokens.
 
 ---
 
@@ -185,4 +263,4 @@ Each entry starts with `## [YYYY-MM-DD] <operation> | <title>` so it's grep-pars
 grep "^## \[" wiki/log.md | tail -10
 ```
 
-Operations: `ingest`, `query`, `lint`, `graph`
+Operations: `ingest`, `query`, `health`, `lint`, `graph`
