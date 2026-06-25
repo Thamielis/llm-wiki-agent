@@ -1,26 +1,26 @@
 ---
-title: "A PowerShell Conversion Challenge"
+title: "creating-class-definition-from-object-part-2"
 type: source
-tags: [powershell, classes]
-date: 2026-04-08
+tags: [powershell, classes, generation]
+date: 2026-06-25
 source_file: raw/PowerShell/Classes/creating-class-definition-from-object-part-2.md
 ---
 
 ## Summary
-This source captures guidance and examples for a powershell conversion challenge in a PowerShell context. It expands the wiki's classes coverage with operational patterns, commands, and implementation notes.
+This source continues the object-to-class generation series. The second part likely moves from discovery into constructing the generated class definition.
 
 ## Key Claims
-- Insert placeholder for methods
-- Let the user specify a method
-- Be VSCode aware and insert the new class automatically into the current file
+- Class generation is a multi-step workflow
+- The middle stage turns inspected object data into code structure
+- Automated class creation reduces manual boilerplate
 
 ## Key Quotes
-> "title: Creating a Class Definition from an Existing Object - Part 2" — source text
+> "part-2" — source title fragment
 
 ## Connections
-- [[PowerShell]] — execution and scripting foundation
-- [[PowerShellClasses]] — primary domain entity in this source set
-- [[ObjectOrientedPowerShell]] — recurring concept reinforced by this source
+- [[PowerShellClasses]] — generated class definitions
+- [[ObjectIntrospection]] — source objects shape the generated result
+- [[ScriptArchitecture]] — staged transformation pipeline
 
 ## Contradictions
 - No direct contradiction detected with current wiki pages.

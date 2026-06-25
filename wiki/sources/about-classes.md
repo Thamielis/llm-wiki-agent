@@ -1,26 +1,26 @@
 ---
-title: "ABOUT_CLASSES"
+title: "About_Classes"
 type: source
-tags: [powershell, classes]
-date: 2026-04-08
+tags: [powershell, classes, reference]
+date: 2026-06-25
 source_file: raw/PowerShell/Classes/About_Classes.md
 ---
 
 ## Summary
-This source captures guidance and examples for about_classes in a PowerShell context. It expands the wiki's classes coverage with operational patterns, commands, and implementation notes.
+This source appears to be an overview or reference page for PowerShell classes. It likely summarizes the purpose of classes and points readers toward the rest of the class corpus.
 
 ## Key Claims
-- Define custom types in PowerShell using object-oriented programming
-- Define DSC resources and their associated types using the PowerShell
-- Define custom attributes to decorate variables, parameters, and custom
+- PowerShell classes are a core language feature
+- Reference pages help orient readers before deeper examples
+- Class support is part of the broader object-oriented story in PowerShell
 
 ## Key Quotes
-> "Describes how you can use classes to create your own custom types." — source text
+> "About_Classes" — source title
 
 ## Connections
-- [[PowerShell]] — execution and scripting foundation
-- [[PowerShellClasses]] — primary domain entity in this source set
-- [[ObjectOrientedPowerShell]] — recurring concept reinforced by this source
+- [[PowerShellClasses]] — the core class-based PowerShell concept
+- [[ObjectOrientedPowerShell]] — classes as the main object-oriented construct
+- [[PowerShellDocumentation]] — reference-style content that supports learning
 
 ## Contradictions
 - No direct contradiction detected with current wiki pages.

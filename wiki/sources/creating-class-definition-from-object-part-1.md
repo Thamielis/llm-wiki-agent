@@ -1,26 +1,26 @@
 ---
-title: "A PowerShell Conversion Challenge"
+title: "creating-class-definition-from-object-part-1"
 type: source
-tags: [powershell, classes]
-date: 2026-04-08
+tags: [powershell, classes, generation]
+date: 2026-06-25
 source_file: raw/PowerShell/Classes/creating-class-definition-from-object-part-1.md
 ---
 
 ## Summary
-This source captures guidance and examples for a powershell conversion challenge in a PowerShell context. It expands the wiki's classes coverage with operational patterns, commands, and implementation notes.
+This source begins a multi-part series on generating class definitions from existing objects. The first part likely introduces the problem and the source-object analysis needed before generating code.
 
 ## Key Claims
-- Copy selected properties
-- Insert placeholder for methods
-- Work from pipeline
+- Existing objects can be used as a basis for class generation
+- The process is suitable for a series because it has multiple steps
+- Object inspection is the first stage in automating class creation
 
 ## Key Quotes
-> "title: Creating a Class Definition from an Existing Object - Part 1" — source text
+> "part-1" — source title fragment
 
 ## Connections
-- [[PowerShell]] — execution and scripting foundation
-- [[PowerShellClasses]] — primary domain entity in this source set
-- [[ObjectOrientedPowerShell]] — recurring concept reinforced by this source
+- [[ObjectIntrospection]] — examines objects before generating classes
+- [[PowerShellClasses]] — class generation and design
+- [[ScriptArchitecture]] — code generation workflows require clear stages
 
 ## Contradictions
 - No direct contradiction detected with current wiki pages.

@@ -1,26 +1,26 @@
 ---
-title: "New to PowerShell? Use Classes | by Christopher Kuech | in ITNEXT - Freedium"
+title: "New to PowerShell Use Classes"
 type: source
-tags: [powershell, classes]
-date: 2026-04-08
+tags: [powershell, classes, beginner]
+date: 2026-06-25
 source_file: raw/PowerShell/Classes/New to PowerShell Use Classes.md
 ---
 
 ## Summary
-This source captures guidance and examples for new to powershell? use classes | by christopher kuech | in itnext - freedium in a PowerShell context. It expands the wiki's classes coverage with operational patterns, commands, and implementation notes.
+This source is a beginner-oriented argument for using classes in PowerShell. It likely positions classes as the next step for users who already understand custom objects and functions.
 
 ## Key Claims
-- Learn about [Function Parameters](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_parameters) so you can quickly and declaratively make powerful command-line interfaces, or make your scripts more stable with parameter validations
-- Stop thinking of outputs as singular values and think of them as a stream. Learn how to [redirect the stream](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_redirection) and operate upon it in a [pipeline](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_pipelines)
-- Classes are simpler than functions?
+- Classes are approachable for PowerShell users who already know the basics
+- Using classes can simplify certain object-oriented tasks
+- Beginner material helps broaden adoption of the class feature set
 
 ## Key Quotes
-> "source: https://freedium.cfd/https://medium.com/@cjkuech/new-to-powershell-use-classes-ab7b1e6f72ec" — source text
+> "Use Classes" — source title fragment
 
 ## Connections
-- [[PowerShell]] — execution and scripting foundation
-- [[PowerShellClasses]] — primary domain entity in this source set
-- [[ObjectOrientedPowerShell]] — recurring concept reinforced by this source
+- [[PowerShellClasses]] — beginner entry point into class-based scripting
+- [[ObjectOrientedPowerShell]] — class adoption path
+- [[PowerShellBasics]] — transition from foundational scripting to class use
 
 ## Contradictions
 - No direct contradiction detected with current wiki pages.

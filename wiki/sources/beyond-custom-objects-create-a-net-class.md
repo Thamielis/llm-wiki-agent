@@ -1,26 +1,26 @@
 ---
 title: "Beyond custom objects: Create a .NET class"
 type: source
-tags: [powershell, classes]
-date: 2026-04-08
+tags: [powershell, classes, .net]
+date: 2026-06-25
 source_file: raw/PowerShell/Classes/Beyond custom objects Create a .NET class.md
 ---
 
 ## Summary
-This source captures guidance and examples for beyond custom objects: create a .net class in a PowerShell context. It expands the wiki's classes coverage with operational patterns, commands, and implementation notes.
+This source contrasts plain custom objects with actual .NET class definitions. It likely argues that classes are appropriate when object shape and behavior need to be formally defined.
 
 ## Key Claims
-- **OutputType**. Enclose in square brackets the .NET type of the objects that the method returns. If the method doesn't return anything, that is, if the output type is **\[Void\]**, you can omit the output type, because Void is the default. It's nice to include it anyway.Unlike the output types of functions, which are just notes, the output types of methods are enforced. If the method doesn't return the declared output type, the method generates an error
-- **Name**. Specify the name of the method. Typically, method names are a single camel-cased string
-- **Parameters**. The parameters of a method are always mandatory and positional. Each method has only one parameter set. Methods in a class can have the same name as other methods, but if they do, they must take different types and numbers of parameters. The parentheses that surround the parameters are required, even when the method doesn't take any parameters
+- Custom objects are useful but limited compared with classes
+- .NET classes provide stronger structure and reuse
+- Class definitions are appropriate when behavior and contract matter
 
 ## Key Quotes
-> "https://www.sapien.com/blog/2014/12/02/beyond-custom-objects-create-a-net-class/" — source text
+> "Beyond custom objects" — source title fragment
 
 ## Connections
-- [[PowerShell]] — execution and scripting foundation
-- [[PowerShellClasses]] — primary domain entity in this source set
-- [[ObjectOrientedPowerShell]] — recurring concept reinforced by this source
+- [[PowerShellClasses]] — class definition and usage
+- [[ObjectOrientedPowerShell]] — explicit type modeling in scripts
+- [[PowerShellBasics]] — advanced object-model evolution
 
 ## Contradictions
 - No direct contradiction detected with current wiki pages.
